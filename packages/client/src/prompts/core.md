@@ -25,15 +25,37 @@ The basic schema file is like this:
           "items": {
             "$ref": "#/properties/root"
           }
+        },
+        "animations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "parameters": {
+                "type": "object"
+              }
+            }
+          }
         }
       }
     }
   },
-  "required": ["root"]
+  "required": [
+    "root"
+  ]
 }
 ```
 
-This structure describe a scene. Each scene has a root widget object, and each widget has a property type (e.g. Circle, Rect, Text, or complexer figures), a property arguments with some mandatory, a property options with some optional parameters, and a property children which include the children widget of the parent widget. All coordinates are relative to the coordinates of their parent widget, and the principle of "the child moves when the parent moves, and the parent does not move when the child moves" is maintained.
+This structure describe a scene. Each scene has a root widget object, and each widget has a property `type` (e.g. Circle, Rect, Text, or complexer figures), a property `arguments` with some mandatory, a property `options` with some optional parameters, a property `children` which include the children widget of the parent widget, and a property `animations` includes the animations that the widget has.
+
+All coordinates are relative to the coordinates of their parent widget, and the principle of "the child moves when the parent moves, and the parent does not move when the child moves" is maintained.
+
+A animation include a animation type and his parameters. Each animation has a parameter `duration` which is the length of this animation. And some animation has parameter `from` and `to`, which is represented the value's changes.
+
+---
 
 The followings are explained each widget's type and their usages.
 
@@ -261,3 +283,19 @@ export interface TextStyle extends FigureStyle {
 parameters: `texts: Array<Text>`
 
 Notice: The `Text` type is a widget.
+
+---
+
+The followings will explain the animation types and their usage. **You must try you best to use these animation to make sure the variety of animation**
+
+# `create`
+
+Show the process of a widget's creating as a animation.
+
+# `destroy`
+
+Show the destroty process of a widget, it could be understanded as the reverse of animation `create`
+
+# `stroke`
+
+Show the stroke process of a widget as animation. **It only can be use on `Path` widget and some widget extends `Path`**, and when use it, you must make sure that `style.border` is true and `style.fill` is false.
