@@ -1,7 +1,11 @@
-import { OpenAI } from '@langchain/openai'
+import { ChatOpenAI } from '@langchain/openai'
+import { systemMessage } from '../prompts/core'
+import { HumanMessage } from '@langchain/core/messages'
+import { frequencyMistake } from '../prompts/frequency-mistake'
 
 export interface OpenAIOptions {
-  apiKey: string
+  apiKey?: string
+  openAIApiKey?: string
   temperature?: number
   topP?: number
   frequencyPenalty?: number
@@ -10,7 +14,7 @@ export interface OpenAIOptions {
 }
 
 export function createVisionAppBasedOnOpenAI(openAIOptions: OpenAIOptions) {
-  const openai = new OpenAI(openAIOptions)
+  const openai = new ChatOpenAI(openAIOptions)
 
   return openai
 }
