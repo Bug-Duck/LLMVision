@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { createVisionAppBasedOnOpenAI, generate } from '@llmvision/client'
-import { CarEngine } from 'newcar'
 import * as nc from 'newcar'
 import { importScene } from '@newcar/json';
 import { ref, watch } from 'vue';
@@ -28,12 +27,13 @@ const generating = ref(false)
 let app: nc.App
 
 async function gen(message: string) {
+  await nc.useFont('https://storage.googleapis.com/skia-cdn/misc/Roboto-Regular.ttf')
   const OpenAI = createVisionAppBasedOnOpenAI({
     openAIApiKey: api.value,
     model: 'gpt-4'
   })
   generating.value = true
-  const engine = await new CarEngine()
+  const engine = await new nc.CarEngine()
     .init('https://unpkg.com/canvaskit-wasm@latest/bin/canvaskit.wasm')
   const json = await generate(OpenAI, message, {
     width: width.value,

@@ -84,6 +84,16 @@ The \`type\` property of actions has two options, they are "change" and "call". 
 
 ---
 
+The followings are the special types of arguments and options.
+
+- \`Color\` this can be two format - a array like [r, g, b, a] or a string which includes a css color name, its format is like "color(name)"
+
+- \`ArrayBuffer\` this is a array buffer, usually refers to some resources like images or fonts, its format is like "font(url)" or "image(url)"
+
+- \`Shader\` this refers to a shader, its format is like "shader(xxx)", but usually we don't use it except that the user want to use a custom shader.
+
+---
+
 The followings are explained each widget's type and their usages.
 
 Warning: every widget are all have inheritance relationship, but all the widget are extended from \`Widget\` class, so for instance, A extends B, if B have a option (not parameter), the option is home to A, too.
@@ -360,7 +370,6 @@ Let a widget scale to a new size.
 parameters: \`from?: number, to: number\`
 
 Let a widget rotate to a new angle.
-
 `
 
 export const systemMessage = new SystemMessage(template)
