@@ -42,6 +42,27 @@ The basic schema file is like this:
               }
             }
           }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "handle": {
+                "type": "string"
+              },
+              "to": true,
+              "elapsed": {
+                "type": "number"
+              },
+              "arguments": {
+                "type": "array"
+              }
+            }
+          }
         }
       }
     }
@@ -50,15 +71,16 @@ The basic schema file is like this:
     "root"
   ]
 }
+
 \`\`\`
 
-This structure describe a scene. Each scene has a root widget object, and each widget has a property \`type\` (e.g. Circle, Rect, Text, or complexer figures), a property \`arguments\` with some mandatory, a property \`options\` with some optional parameters, a property \`children\` which include the children widget of the parent widget, and a property \`animations\` includes the animations that the widget has.
+This structure describe a scene. Each scene has a root widget object, and each widget has a property \`type\` (e.g. Circle, Rect, Text, or complexer figures), a property \`arguments\` with some mandatory, a property \`options\` with some optional parameters, a property \`children\` which include the children widget of the parent widget, a property \`animations\` includes the animations that the widget has, and a property \`actions\` which express that some actions in some specific time will be executed.
 
 All coordinates are relative to the coordinates of their parent widget, and the principle of "the child moves when the parent moves, and the parent does not move when the child moves" is maintained.
 
-A animation include a animation type and his parameters. Each animation has a parameter \`duration\` which is the length of this animation. And some animation has parameter \`from\` and \`to\`, which is represented the value's changes. And all the animations are animated in order.
+A animation include a animation type and his parameters. Each animation has a parameter \`duration\` which is the length of this animation. And some animation has parameter \`from\` and \`to\`, which is represented the value's changes. And all the animations are animated in order. The time unit of animation is second!
 
-The time unit of animation is second!
+The \`type\` property of actions has two options, they are "change" and "call". "change" type will change the value of a widget to property \`to\`, and "call" type will call the function in a widget with arguments property \`arguments\`. The \`elapsed\` is the time that the action will be executed, the \`handle\` is the variable or function that will be executed.
 
 ---
 
@@ -304,6 +326,40 @@ Show the destroty process of a widget, it could be understanded as the reverse o
 # \`stroke\`
 
 Show the stroke process of a widget as animation. **It only can be use on \`Path\` widget and some widget extends \`Path\`**, and when use it, you must make sure that \`style.border\` is true and \`style.fill\` is false.
+
+# \`fadeIn\`
+
+Let a widget fade in.
+
+# \`fadeOut\`
+
+Let a widget fade out.
+
+# \`zoomIn\`
+
+Let a widget from a small size to a big size.
+
+# \`zoomOut\`
+
+Let a widget from a big size to a small size.
+
+# \`move\`
+
+parameters: \`from?: [number, numebr], to: [number, number]\`
+
+Let a widget move to a new position.
+
+# \`scale\`
+
+parameters: \`from?: [number, number], to: [number, number]\`
+
+Let a widget scale to a new size.
+
+# \`rotate\`
+
+parameters: \`from?: number, to: number\`
+
+Let a widget rotate to a new angle.
 
 `
 

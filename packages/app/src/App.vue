@@ -55,7 +55,7 @@ async function gen(message: string) {
 </script>
 
 <template>
-  <div class="flex flex-col h-screen">
+  <div class="flex flex-col h-screen w-screen">
     <div class="flex flex-row w-full h-12 border">
       <div class="float-left">
         <img class="w-10 h-10 pt-1">
@@ -63,7 +63,7 @@ async function gen(message: string) {
       <div class="h-full flex justify-center items-center pl-5 float-left">
         <div class="text-2xl font-mono float-left">LLM Vision</div>
       </div>
-      <div class="float-right justify-center items-center flex ml-[80%]">
+      <div class="float-right">
         <div class="text-xl font-mono text-sky-300"><a href="https://github.com/Bug-Duck/LLMVision">GitHub</a></div>
       </div>
     </div>
