@@ -34,7 +34,7 @@ async function gen(message: string) {
   })
   generating.value = true
   const engine = await new CarEngine()
-    .init('../node_modules/canvaskit-wasm/bin/canvaskit.wasm')
+    .init('https://unpkg.com/canvaskit-wasm@latest/bin/canvaskit.wasm')
   const json = await generate(OpenAI, message, {
     width: width.value,
     height: height.value,
