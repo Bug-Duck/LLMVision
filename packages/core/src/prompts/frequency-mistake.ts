@@ -1,6 +1,6 @@
 import { SystemMessage } from "@langchain/core/messages"
 
-export const frequencyMistake = new SystemMessage(
+export const template = 
 `
 The followings is what mistakes you usually make:
 
@@ -9,4 +9,5 @@ The followings is what mistakes you usually make:
 - You sometimes may forgot to **do not** explain json data.
 - You always express some happy or greet in the start of the answer, but we don't need it.
 `
-)
+
+export const frequencyMistake = new SystemMessage(template)

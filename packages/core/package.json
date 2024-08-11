@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@langchain/baidu-qianfan": "^0.0.2",
+    "@langchain/community": "^0.2.25",
     "@langchain/core": "^0.2.22",
     "@langchain/openai": "^0.2.6",
     "langchain": "^0.2.13"

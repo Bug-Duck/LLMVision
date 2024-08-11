@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { createVisionAppBasedOnOpenAI, generate } from '@llmvision/core'
+import { generateByZhipuAI, createVisionAppBasedOnZhipuAI, createVisionAppBasedOnOpenAI, generateByOpenAI } from '@llmvision/core'
 import * as nc from 'newcar'
 import { importScene } from '@newcar/json'
 import { ref, watch } from 'vue'
 import { codeToHtml } from 'shiki'
 
+const model = ref('gpt-3.5')
 const api = ref(document.cookie)
 
 const content = ref()
@@ -30,19 +31,52 @@ const generating = ref(false)
 let app: nc.App
 
 async function gen(message: string) {
-document.cookie = api.value
+  document.cookie = api.value
   await nc.useFont('https://storage.googleapis.com/skia-cdn/misc/Roboto-Regular.ttf')
-  const OpenAI = createVisionAppBasedOnOpenAI({
-    openAIApiKey: api.value,
-    model: 'gpt-4'
-  })
+  let llm: any
+  switch (model.value) {
+    case 'gpt-4':
+      llm = createVisionAppBasedOnOpenAI({
+        openAIApiKey: api.value,
+        model: 'gpt-4'
+      })
+      break
+    case 'glm-3':
+      llm = createVisionAppBasedOnZhipuAI({
+        modelName: 'glm-3-turbo',
+        model: 'glm-3-turbo',
+        zhipuAIApiKey: api.value,
+      })
+      break
+    case 'glm-4':
+      llm = createVisionAppBasedOnZhipuAI({
+        modelName: 'glm-4',
+        model: 'glm-4',
+        zhipuAIApiKey: api.value,
+      })
+      break
+  }
+  
   generating.value = true
   const engine = await new nc.CarEngine()
-    .init('https://unpkg.com/canvaskit-wasm@latest/bin/canvaskit.wasm')
-  const json = await generate(OpenAI, message, {
-    width: width.value,
-    height: height.value,
-  })
+    .init('../node_modules/canvaskit-wasm/bin/canvaskit.wasm')
+  console.log('engine initialized!')
+  let json: string = ''
+  switch (model.value) {
+    case 'gpt-4':
+      json = await generateByOpenAI(llm, message, {
+        width: width.value,
+        height: height.value,
+      })
+      break
+    case 'glm-3':
+    case 'glm-4':
+      json = await generateByZhipuAI(llm, message, {
+        width: width.value,
+        height: height.value,
+      })
+  }
+  generating.value = false
   app = engine.createApp(canvas.value)
   console.log(json)
   try {
@@ -99,6 +133,15 @@ document.cookie = api.value
       </div>
       <div class="border md:w-5/12 sm:block overflow-y-scroll">
         <div class="m-5">
+          <div class="py-3">
+            <h1 class="font-mono">Model</h1>
+            <select class="border rounded-lg w-full h-8 bg-white" v-model="model">
+              <!-- <option value="gpt-3.5">GPT-3.5</option> -->
+              <option value="gpt-4">GPT-4</option>
+              <option value="glm-3">GLM-3</option>
+              <option value="glm-4">GLM-4</option>
+            </select>
+          </div>
           <div class="py-3">
             <h1 class="font-mono">Your API Key</h1>
             <input class="border rounded-lg w-full h-8 bg-white" v-model="api">

@@ -1,11 +1,11 @@
 import { SystemMessage } from "@langchain/core/messages"
 
-const template = `
+export const template = `
 You are a animation desginer, you now are using a animation engine named Newcar, which supports generate animation from json string with a specific format.
 
 Now you need to write the json string according to following description to the json format and the requirement.
 
-The basic schema file is like this:
+The JSON schema file is as follows: (WARNing: It is the json schema file of the animation engine, not the json string you need to write)
 
 \`\`\`json
 {
@@ -113,7 +113,6 @@ export interface WidgetOptions {
   style?: WidgetStyle
   x?: number
   y?: number
-  pos?: Position | [number, number]
   centerX?: number // The rotation center x of the widget.
   centerY?: number // The rotation center y of the widget.
   progress?: number
@@ -445,6 +444,40 @@ export const easeBounce: TimingFunction = (x: number): number =>
 \`\`\`
 
 You need **try you best** to use these easing functions with reasonable usage cases.
-`
 
-export const systemMessage = new SystemMessage(template)
+---
+
+The example is as follows:
+
+\`\`\`json
+{{
+  "root": {
+    "type": "Circle",
+    "arguments": [150],
+    "options": {
+      "style": {
+        "border": true,
+        "fill": false,
+        "borderColor": [144, 144, 144, 1]
+      },
+      "x": 800,
+      "y": 450
+    },
+    "animations": [
+      {
+        "type": "stroke",
+        "parameters": {
+          "duration": 4
+        }
+      },
+      {
+        "type": "destroy",
+        "parameters": {
+          "duration": 2
+        }
+      }
+    ]
+  }
+}
+\`\`\`
+`
