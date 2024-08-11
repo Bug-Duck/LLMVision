@@ -24,12 +24,12 @@ importers:
       '@langchain/core':
         specifier: ^0.2.22
         version: 0.2.22(langchain@0.2.13(ignore@5.3.1)(openai@4.55.1(zod@3.23.8))(ws@6.2.0))(openai@4.55.1(zod@3.23.8))
-      '@llmvision/client':
+      '@llmvision/core':
         specifier: workspace:*
-        version: link:../client
+        version: link:../core
       '@newcar/json':
-        specifier: 2.0.0-beta.6
-        version: 2.0.0-beta.6(canvaskit-wasm@0.39.1)
+        specifier: 2.0.0-beta.7
+        version: 2.0.0-beta.7(canvaskit-wasm@0.39.1)
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.41)
@@ -37,8 +37,11 @@ importers:
         specifier: ^0.39.1
         version: 0.39.1
       newcar:
-        specifier: 2.0.0-beta.6
-        version: 2.0.0-beta.6(canvaskit-wasm@0.39.1)
+        specifier: 2.0.0-beta.7
+        version: 2.0.0-beta.7(canvaskit-wasm@0.39.1)
+      shiki:
+        specifier: ^1.12.1
+        version: 1.12.1
       tailwindcss:
         specifier: ^3.4.9
         version: 3.4.9
@@ -65,7 +68,7 @@ importers:
         specifier: ^2.0.29
         version: 2.0.29(typescript@5.5.4)
 
-  packages/client:
+  packages/core:
     dependencies:
       '@langchain/core':
         specifier: ^0.2.22
@@ -425,26 +428,26 @@ packages:
     resolution: {integrity: sha512-cXWgKE3sdWLSqAa8ykbCcUsUF1Kyr5J3HOWYGuobhPEycXW4WI++d5DhzdpL238mzoEXTi90VqfSCra37l5YqA==}
     engines: {node: '>=18'}
 
-  '@newcar/basic@2.0.0-beta.6':
-    resolution: {integrity: sha512-SOKMBA1VGNv0KE36JsFFPAy5Asc1Bt2w5/XvWXsSbOPdfVQEdBHymukaua2/1e/+zZyBHtld1JTx0Pl/1Lf3cw==}
+  '@newcar/basic@2.0.0-beta.7':
+    resolution: {integrity: sha512-cFCVLvOxF8WMrySI5BwyC8cKnlmsyQx4atBTtQMSJdwiG8CbHivAsxh64/zWbP6knUcIgKPLWAzv+Qse944Dng==}
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
-  '@newcar/core@2.0.0-beta.6':
-    resolution: {integrity: sha512-KRJ9AzJMj/aB6yKBucTgZR8R0Cs6F8pqiW95/JrkxRaEUVpyNkAKd0SD+qKeqsZR/57czneLEO5IQ5xpYiG6YQ==}
+  '@newcar/core@2.0.0-beta.7':
+    resolution: {integrity: sha512-VvWKOJ/5sGwb9o7l5DbtpdiXYGC0Zv5jcrnXDwqVoONLnvBYpjdAHJLPqt7nZTBNuU+E6cVzXtapgrWAHcHnbg==}
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
-  '@newcar/json@2.0.0-beta.6':
-    resolution: {integrity: sha512-UX4Jp3IabXJn6y9ZoMg9r6L79g5l+gNirzAbMNcN0qYDHPiohSQkg4iYh86Lc66Nver7ta4UD75qVkFFqpnbyA==}
+  '@newcar/json@2.0.0-beta.7':
+    resolution: {integrity: sha512-kHYJfYpZc+EbGcdiWAOX8LYVOq8hfnajiZXxKWntfDGTiijEt0imqFHZH3CrHucNwbrgUNYLIRoOZIN2SnokLg==}
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
-  '@newcar/recorder@2.0.0-beta.6':
-    resolution: {integrity: sha512-h+xCnyYo0XiNTbusghKAuz8iCKCLAV3qazuXM42cWFJ6sH8MhtCwFQhK3QhpMZlgpFkJGU51MR5uFmhz/V8vCA==}
+  '@newcar/recorder@2.0.0-beta.7':
+    resolution: {integrity: sha512-5PkO0fkQvepgkJQ2wkCULAOOasUwSxvh2mXGjXnzysK+RO4kzSJ8T8zQNFX+Ex0h6g3StOnoGvcDRrO+Mt/8yg==}
 
-  '@newcar/utils@2.0.0-beta.6':
-    resolution: {integrity: sha512-3A65BRtUEoetxnjn8CwBE6R6a0Lx3OaD+Wsb7sAn8RFIzlPZrrP3lU0pcZt/y8ewDCW8NADnGnK0U36cz532oA==}
+  '@newcar/utils@2.0.0-beta.7':
+    resolution: {integrity: sha512-m+gNf1sAdFR6S/4IzU/qcj7+nDjRG6D5BJIdQB/YWkGgzsao3/YQ+JmkD/IVkeHs9PHtANju5BEbr1cUftiyNA==}
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
@@ -544,8 +547,14 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@shikijs/core@1.12.1':
+    resolution: {integrity: sha512-biCz/mnkMktImI6hMfMX3H9kOeqsInxWEyCHbSlL8C/2TR1FqfmGxTLRNwYCKsyCyxWLbB8rEqXRVZuyxuLFmA==}
+
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
+
+  '@types/hast@3.0.4':
+    resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
 
   '@types/node-fetch@2.6.11':
     resolution: {integrity: sha512-24xFj9R5+rfQJLRyM56qh+wnVSYhyXC2tkoBndtY0U+vubqNsYXGjufB2nn8Q6gt0LrARwL6UBtMCSVCwl4B1g==}
@@ -555,6 +564,9 @@ packages:
 
   '@types/retry@0.12.0':
     resolution: {integrity: sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==}
+
+  '@types/unist@3.0.2':
+    resolution: {integrity: sha512-dqId9J8K/vGi5Zr7oo212BGii5m3q5Hxlkwy3WpYuKPklmBEvsbMYYyLxAQpSffdLl/gdW0XUpKWFvYmyoWCoQ==}
 
   '@types/uuid@9.0.8':
     resolution: {integrity: sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA==}
@@ -1718,8 +1730,8 @@ packages:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
     engines: {node: '>= 0.6'}
 
-  newcar@2.0.0-beta.6:
-    resolution: {integrity: sha512-WNuFivxS3FmcoXutUJDHkE3GCKSJBYaYiZ0dt/3Pash5UQWphI0mNmphvrUE6i8vLhm6/ZvBGz+OCiOSwaBUxA==}
+  newcar@2.0.0-beta.7:
+    resolution: {integrity: sha512-uN4LNeQjvYrXub9ASumraDSvsfNINgNvSiZe87baoFRY/05EKR/NguVc9D1fOCfP0lCOOhAzk9lpQJIMg7aBFQ==}
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
@@ -2067,6 +2079,9 @@ packages:
   shebang-regex@3.0.0:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
+
+  shiki@1.12.1:
+    resolution: {integrity: sha512-nwmjbHKnOYYAe1aaQyEBHvQymJgfm86ZSS7fT8OaPRr4sbAcBNz7PbfAikMEFSDQ6se2j2zobkXvVKcBOm0ysg==}
 
   side-channel@1.0.6:
     resolution: {integrity: sha512-fDW/EZ6Q9RiO8eFG8Hj+7u/oW+XrPTIChwCOM2+th2A6OblDtYYIpve9m+KvI9Z4C9qSEXlaGR6bTEYHReuglA==}
@@ -2650,28 +2665,28 @@ snapshots:
       - langchain
       - openai
 
-  '@newcar/basic@2.0.0-beta.6(canvaskit-wasm@0.39.1)':
+  '@newcar/basic@2.0.0-beta.7(canvaskit-wasm@0.39.1)':
     dependencies:
-      '@newcar/core': 2.0.0-beta.6(canvaskit-wasm@0.39.1)
-      '@newcar/utils': 2.0.0-beta.6(canvaskit-wasm@0.39.1)
+      '@newcar/core': 2.0.0-beta.7(canvaskit-wasm@0.39.1)
+      '@newcar/utils': 2.0.0-beta.7(canvaskit-wasm@0.39.1)
       canvaskit-wasm: 0.39.1
 
-  '@newcar/core@2.0.0-beta.6(canvaskit-wasm@0.39.1)':
+  '@newcar/core@2.0.0-beta.7(canvaskit-wasm@0.39.1)':
     dependencies:
-      '@newcar/utils': 2.0.0-beta.6(canvaskit-wasm@0.39.1)
-      canvaskit-wasm: 0.39.1
-      mitt: 3.0.1
-
-  '@newcar/json@2.0.0-beta.6(canvaskit-wasm@0.39.1)':
-    dependencies:
-      '@newcar/core': 2.0.0-beta.6(canvaskit-wasm@0.39.1)
-      '@newcar/utils': 2.0.0-beta.6(canvaskit-wasm@0.39.1)
+      '@newcar/utils': 2.0.0-beta.7(canvaskit-wasm@0.39.1)
       canvaskit-wasm: 0.39.1
       mitt: 3.0.1
 
-  '@newcar/recorder@2.0.0-beta.6': {}
+  '@newcar/json@2.0.0-beta.7(canvaskit-wasm@0.39.1)':
+    dependencies:
+      '@newcar/core': 2.0.0-beta.7(canvaskit-wasm@0.39.1)
+      '@newcar/utils': 2.0.0-beta.7(canvaskit-wasm@0.39.1)
+      canvaskit-wasm: 0.39.1
+      mitt: 3.0.1
 
-  '@newcar/utils@2.0.0-beta.6(canvaskit-wasm@0.39.1)':
+  '@newcar/recorder@2.0.0-beta.7': {}
+
+  '@newcar/utils@2.0.0-beta.7(canvaskit-wasm@0.39.1)':
     dependencies:
       canvaskit-wasm: 0.39.1
       colorparsley: 0.1.8
@@ -2739,7 +2754,15 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.20.0':
     optional: true
 
+  '@shikijs/core@1.12.1':
+    dependencies:
+      '@types/hast': 3.0.4
+
   '@types/estree@1.0.5': {}
+
+  '@types/hast@3.0.4':
+    dependencies:
+      '@types/unist': 3.0.2
 
   '@types/node-fetch@2.6.11':
     dependencies:
@@ -2751,6 +2774,8 @@ snapshots:
       undici-types: 5.26.5
 
   '@types/retry@0.12.0': {}
+
+  '@types/unist@3.0.2': {}
 
   '@types/uuid@9.0.8': {}
 
@@ -3895,13 +3920,13 @@ snapshots:
 
   negotiator@0.6.3: {}
 
-  newcar@2.0.0-beta.6(canvaskit-wasm@0.39.1):
+  newcar@2.0.0-beta.7(canvaskit-wasm@0.39.1):
     dependencies:
-      '@newcar/basic': 2.0.0-beta.6(canvaskit-wasm@0.39.1)
-      '@newcar/core': 2.0.0-beta.6(canvaskit-wasm@0.39.1)
-      '@newcar/json': 2.0.0-beta.6(canvaskit-wasm@0.39.1)
-      '@newcar/recorder': 2.0.0-beta.6
-      '@newcar/utils': 2.0.0-beta.6(canvaskit-wasm@0.39.1)
+      '@newcar/basic': 2.0.0-beta.7(canvaskit-wasm@0.39.1)
+      '@newcar/core': 2.0.0-beta.7(canvaskit-wasm@0.39.1)
+      '@newcar/json': 2.0.0-beta.7(canvaskit-wasm@0.39.1)
+      '@newcar/recorder': 2.0.0-beta.7
+      '@newcar/utils': 2.0.0-beta.7(canvaskit-wasm@0.39.1)
       canvaskit-wasm: 0.39.1
 
   nocache@2.0.0: {}
@@ -4242,6 +4267,11 @@ snapshots:
       shebang-regex: 3.0.0
 
   shebang-regex@3.0.0: {}
+
+  shiki@1.12.1:
+    dependencies:
+      '@shikijs/core': 1.12.1
+      '@types/hast': 3.0.4
 
   side-channel@1.0.6:
     dependencies:

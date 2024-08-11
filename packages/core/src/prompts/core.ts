@@ -78,7 +78,7 @@ This structure describe a scene. Each scene has a root widget object, and each w
 
 All coordinates are relative to the coordinates of their parent widget, and the principle of "the child moves when the parent moves, and the parent does not move when the child moves" is maintained.
 
-A animation include a animation type and his parameters. Each animation has a parameter \`duration\` which is the length of this animation. And some animation has parameter \`from\` and \`to\`, which is represented the value's changes. And all the animations are animated in order. The time unit of animation is second!
+A animation include a animation type and his parameters. Each animation has a parameter \`duration\` which is the length of this animation, and the parameter \`easingFunctions\` which express the easing function which controls the animation's speed changing (You can only use the prepared function's name, in current version we cannot custom easing functions, the name and there syntax will be listed below there). And some animation has parameter \`from\` and \`to\`, which is represented the value's changes. And all the animations are animated in order. The time unit of animation is second!
 
 The \`type\` property of actions has two options, they are "change" and "call". "change" type will change the value of a widget to property \`to\`, and "call" type will call the function in a widget with arguments property \`arguments\`. The \`elapsed\` is the time that the action will be executed, the \`handle\` is the variable or function that will be executed.
 
@@ -370,6 +370,81 @@ Let a widget scale to a new size.
 parameters: \`from?: number, to: number\`
 
 Let a widget rotate to a new angle.
+
+---
+
+The following is the timing function's definition:
+
+\`\`\`typescript
+/**
+ * A continuous function that passes through points (0,0) and (1,1).
+ * @param x The independent variable from 0 to 1.
+ * @returns The dependent variable of x.
+ */
+export type TimingFunction = (x: number) => number
+
+const c = 1.701_58
+const n = 7.5625
+const d = 2.75
+
+function invent(f: TimingFunction): TimingFunction {
+  return (x: number): number => 1 - f(1 - x)
+}
+
+function solve(
+  easeIn: TimingFunction,
+  easeOut?: TimingFunction,
+): TimingFunction {
+  easeOut ??= invent(easeIn)
+
+  return (x: number): number =>
+    x < 0.5 ? easeIn(x * 2) / 2 : (easeOut!(x * 2 - 1) + 1) / 2
+}
+
+function _(
+  easeIn: TimingFunction,
+): [TimingFunction, TimingFunction, TimingFunction] {
+  const easeOut: TimingFunction = invent(easeIn)
+  const easeInOut: TimingFunction = solve(easeIn, easeOut)
+
+  return [easeIn, easeOut, easeInOut]
+}
+
+export const linear: TimingFunction = x => x
+
+const easeSine: TimingFunction = x => 1 - Math.cos((x * Math.PI) / 2)
+export const [easeInSine, easeOutSine, easeInOutSine] = _(easeSine)
+
+export const [easeInQuad, easeOutQuad, easeInOutQuad] = _(x => x ** 2)
+export const [easeInCubic, easeOutCubic, easeInOutCubic] = _(x => x ** 3)
+export const [easeInQuart, easeOutQuart, easeInOutQuart] = _(x => x ** 4)
+export const [easeInQuint, easeOutQuint, easeInOutQuint] = _(x => x ** 5)
+
+const easeExpo: TimingFunction = x => x || 2 ** (10 * x - 10)
+const easeCirc: TimingFunction = x => 1 - Math.sqrt(1 - x ** 2)
+const easeBack: TimingFunction = x => (c + 1) * x ** 3 - c * x ** 2
+export const [easeInExpo, easeOutExpo, easeInOutExpo] = _(easeExpo)
+export const [easeInCirc, easeOutCirc, easeInOutCirc] = _(easeCirc)
+export const [easeInBack, easeOutBack, easeInOutBack] = _(easeBack)
+
+const easeElastic: TimingFunction = x =>
+  -Math.sin(((80 * x - 44.5) * Math.PI) / 9) * 2 ** (20 * x - 11)
+export const easeInElastic: TimingFunction = x =>
+  -Math.sin(((20 * x - 21.5) * Math.PI) / 3) * 2 ** (10 * x - 10)
+export const easeOutElastic: TimingFunction = invent(easeInElastic)
+export const easeInOutElastic: TimingFunction = solve(easeElastic)
+
+export const easeBounce: TimingFunction = (x: number): number =>
+  x < 1 / d
+    ? n * x ** 2
+    : x < 2 / d
+      ? n * (x - 1.5 / d) ** 2 + 0.75
+      : x < 2.5 / d
+        ? n * (x - 2.25 / d) ** 2 + 0.9375
+        : n * (x - 2.625 / d) ** 2 + 0.984_375
+\`\`\`
+
+You need **try you best** to use these easing functions with reasonable usage cases.
 `
 
 export const systemMessage = new SystemMessage(template)

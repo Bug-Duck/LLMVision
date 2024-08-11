@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { createVisionAppBasedOnOpenAI, generate } from '@llmvision/client'
+import { createVisionAppBasedOnOpenAI, generate } from '@llmvision/core'
 import * as nc from 'newcar'
-import { importScene } from '@newcar/json';
-import { ref, watch } from 'vue';
+import { importScene } from '@newcar/json'
+import { ref, watch } from 'vue'
+import { codeToHtml } from 'shiki'
 
-const api = ref()
+const api = ref(document.cookie)
 
 const content = ref()
 const canvas = ref()
+
+const codeHtml = ref('')
 
 const width = ref(1600)
 const height = ref(900)
@@ -27,6 +30,7 @@ const generating = ref(false)
 let app: nc.App
 
 async function gen(message: string) {
+document.cookie = api.value
   await nc.useFont('https://storage.googleapis.com/skia-cdn/misc/Roboto-Regular.ttf')
   const OpenAI = createVisionAppBasedOnOpenAI({
     openAIApiKey: api.value,
@@ -42,7 +46,7 @@ async function gen(message: string) {
   app = engine.createApp(canvas.value)
   console.log(json)
   try {
-    const scene = importScene(json, nc as any, nc as any)
+    const scene = importScene(json, nc as any, nc as any, nc as any)
     app.checkout(scene)
     scene.elapsed = 0
     app.play()
@@ -50,12 +54,16 @@ async function gen(message: string) {
     messages.value = err
     dialogOpen.value = true
   }
+  codeHtml.value = await codeToHtml(json, {
+    lang: 'json',
+    theme: 'vitesse-dark',
+  })
   generating.value = false
 }
 </script>
 
 <template>
-  <div class="flex flex-col h-screen w-screen">
+  <div class="flex flex-col h-screen w-screen overflow-hidden">
     <div class="flex flex-row w-full h-12 border">
       <div class="float-left">
         <img class="w-10 h-10 pt-1">
@@ -63,13 +71,13 @@ async function gen(message: string) {
       <div class="h-full flex justify-center items-center pl-5 float-left">
         <div class="text-2xl font-mono float-left">LLM Vision</div>
       </div>
-      <div class="float-right">
+      <div class="absolute right-2 top-3">
         <div class="text-xl font-mono text-sky-300"><a href="https://github.com/Bug-Duck/LLMVision">GitHub</a></div>
       </div>
     </div>
     <div class="flex flex-row w-full h-full">
       <div class="border flex flex-col md:w-7/12 sm:w-full">
-        <div class="h-3/5 border-b">
+        <div class="h-3/5 border-b flex items-center justify-center">
           <canvas
             :width="Number(width)"
             :height="Number(height)"
@@ -89,7 +97,7 @@ async function gen(message: string) {
           </div>
         </div>
       </div>
-      <div class="border md:w-5/12 sm:block">
+      <div class="border md:w-5/12 sm:block overflow-y-scroll">
         <div class="m-5">
           <div class="py-3">
             <h1 class="font-mono">Your API Key</h1>
@@ -104,6 +112,9 @@ async function gen(message: string) {
               <h1 class="font-mono">Height</h1>
               <input class="border rounded-lg w-full h-8 bg-white" v-model="height" value="900">
             </div>
+          </div>
+          <div class="py-3 flex flex-row">
+            <div v-html="codeHtml" class="w-full border-lg"></div>
           </div>
         </div>
       </div>
