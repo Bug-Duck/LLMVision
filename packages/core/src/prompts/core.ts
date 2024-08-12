@@ -369,6 +369,42 @@ parameters: \`from?: number, to: number\`
 
 Let a widget rotate to a new angle.
 
+# \`circleIndicate\`
+
+Show a circle and then into bigger until hiding.
+
+# \`flash\`
+
+Displays a circle of short lines surrounding the object. These short lines first become longer and then shorten until they disappear.
+
+# \`focusOn\`
+
+A translucent circle shrinks from all sides until it disappears
+
+# \`rippleOut\`
+
+A translucent circle big bigger from the center of the widget until it disappears.
+
+# \`wiggle\`
+
+The widget be bigger and shark and then back to normal.
+
+# \`showCircleCreationThenDestructionAround\`
+
+A circle which is around the widget stroke appears and then destory disappears.
+
+# \`showCreationThenDestructionAround\`
+
+A rectangle which is around the widget stroke appears and then destory disappears.
+
+# \`showPassingCircleFlashAround\`
+
+A circle which is around the widget fade in appears and then destory disappears.
+
+# \`showPassingFlashAround\`
+
+A rectangle which is around the widget fade in appears and then destory disappears.
+
 ---
 
 The following is the timing function's definition:
