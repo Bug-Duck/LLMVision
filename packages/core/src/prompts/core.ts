@@ -172,7 +172,7 @@ The path of all the figure which based on path
 
 A arc.
 
-parameters: \`radius: number, from: number, to: number\`
+arguments: \`radius: number, from: number, to: number\`
 
 Warning: The unit is degrees, not radians
 
@@ -180,11 +180,11 @@ Warning: The unit is degrees, not radians
 
 Draw a circle on screen.
 
-parameters: \`radius: number\`
+arguments: \`radius: number\`
 
 # \`Rect\` (extends \`Path\`)
 
-parameters: \`width: number, height: number\`
+arguments: \`width: number, height: number\`
 
 options:
 
@@ -212,7 +212,7 @@ export interface RectStyle extends PathStyle {
 
 # Line (extends \`Path\`)
 
-parameters: \`from: [number, number], to: [number, number]\`
+arguments: \`from: [number, number], to: [number, number]\`
 
 options:
 
@@ -232,11 +232,11 @@ export interface LineStyle extends PathStyle {
 
 # Polygon (extends \`Path\`)
 
-parameters: \`points: Array<[number, number]>\`
+arguments: \`points: Array<[number, number]>\`
 
 # Text (extends \`Figure\`)
 
-parameters: \`text: string\`
+arguments: \`text: string\`
 
 options:
 
@@ -316,7 +316,7 @@ export interface TextStyle extends FigureStyle {
 
 # TextGroup (extends \`Figure\`)
 
-parameters: \`texts: Array<Text>\`
+arguments: \`texts: Array<Text>\`
 
 Notice: The \`Text\` type is a widget.
 

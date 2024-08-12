@@ -15,7 +15,7 @@ export async function generateByZhipuAI(llm: ChatZhipuAI, prompt: string, option
     new SystemMessage(`Known that the width of the canvas is ${options.width ?? 1600}, the height is ${options.height ?? 900}, the background color is black.`),
     new SystemMessage(fm),
     new HumanMessage(prompt),
-    new HumanMessage('请不要生成除了json文件以外任何的文本！'),
+    new HumanMessage('不要生成除了json数据以外的任何文字!'),
   ])
   return callback.content.toString().replace(/(.+)?```json/, '').replace(/```(.+)?$/, '')
 }
