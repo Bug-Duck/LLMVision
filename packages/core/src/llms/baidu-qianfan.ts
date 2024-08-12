@@ -15,5 +15,9 @@ export async function generateByBaiduQianfan(llm: ChatBaiduQianfan, prompt: stri
     new HumanMessage(fm),
     new HumanMessage(prompt),
   ])
-  return (callback.content.toString().match(/```json.+```/s) as RegExpExecArray)[0].replace(/```json/, '').replace(/```$/, '')
+  return (callback.content.toString().match(/```json.+```/s) as RegExpExecArray)[0]
+    .replace(/```json/, '')
+    .replace(/```$/, '')
+    .replace(/\/\/.*(?=[\n\r])/g, '')
+    .replace(/\/\*[\s\S]*?\*\//g, '')
 }

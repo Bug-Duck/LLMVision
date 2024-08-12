@@ -479,4 +479,8 @@ The example is as follows:
   }
 }
 \`\`\`
+
+---
+
+Now it's your time! Please try your best to generate all the graphics according to users!
 `
