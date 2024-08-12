@@ -93,7 +93,7 @@ The followings are the special types of arguments and options.
 - \`Shader\` this refers to a shader, its format is like "shader(xxx)", but usually we don't use it except that the user want to use a custom shader.
 
 ---
-
+-
 The followings are explained each widget's type and their usages.
 
 Warning: every widget are all have inheritance relationship, but all the widget are extended from \`Widget\` class, so for instance, A extends B, if B have a option (not parameter), the option is home to A, too.
