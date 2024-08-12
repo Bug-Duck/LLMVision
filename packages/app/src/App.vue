@@ -164,7 +164,7 @@ async function gen(message: string) {
     </div>
   </div>
   <div class="fixed bottom-2 right-2 border rounded-lg w-1/4 h-1/4" v-if="dialogOpen">
-    <div class="flex self-center items-center justify-center h-full">
+    <div class="flex self-center items-center justify-center h-full bg-white">
       {{ messages }}
     </div>
   </div>
