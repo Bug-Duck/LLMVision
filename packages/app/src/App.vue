@@ -59,7 +59,7 @@ async function gen(message: string) {
   
   generating.value = true
   const engine = await new nc.CarEngine()
-    .init('../node_modules/canvaskit-wasm/bin/canvaskit.wasm')
+    .init('https://unpkg.com/canvaskit-wasm@latest/bin/canvaskit.wasm')
   console.log('engine initialized!')
   let json: string = ''
   switch (model.value) {
