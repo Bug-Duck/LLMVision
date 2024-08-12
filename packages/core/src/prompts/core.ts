@@ -131,7 +131,6 @@ export interface WidgetStyle {
   scaleY?: number
   rotation?: number
   transparency?: number
-  blendMode?: BlendMode
   antiAlias?: boolean
 }
 \`\`\`

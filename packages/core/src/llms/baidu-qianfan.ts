@@ -15,5 +15,5 @@ export async function generateByBaiduQianfan(llm: ChatBaiduQianfan, prompt: stri
     new HumanMessage(fm),
     new HumanMessage(prompt),
   ])
-  return callback.content.toString().replace(/.+```json/, '').replace(/```.+$/, '')
+  return (callback.content.toString().match(/```json.+```/s) as RegExpExecArray)[0].replace(/```json/, '').replace(/```$/, '')
 }

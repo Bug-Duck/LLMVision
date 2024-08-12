@@ -31,68 +31,82 @@ const generating = ref(false)
 let app: nc.App
 
 async function gen(message: string) {
-  document.cookie = api.value
-  await nc.useFont('https://storage.googleapis.com/skia-cdn/misc/Roboto-Regular.ttf')
-  let llm: any
-  switch (model.value) {
-    case 'gpt-4':
-      llm = createVisionAppBasedOnOpenAI({
-        openAIApiKey: api.value,
-        model: 'gpt-4'
-      })
-      break
-    case 'glm-3':
-      llm = createVisionAppBasedOnZhipuAI({
-        modelName: 'glm-3-turbo',
-        model: 'glm-3-turbo',
-        zhipuAIApiKey: api.value,
-      })
-      break
-    case 'glm-4':
-      llm = createVisionAppBasedOnZhipuAI({
-        modelName: 'glm-4',
-        model: 'glm-4',
-        zhipuAIApiKey: api.value,
-      })
-      break
-  }
-  
-  generating.value = true
-  const engine = await new nc.CarEngine()
-    .init('https://unpkg.com/canvaskit-wasm@latest/bin/canvaskit.wasm')
-  console.log('engine initialized!')
-  let json: string = ''
-  switch (model.value) {
-    case 'gpt-4':
-      json = await generateByOpenAI(llm, message, {
-        width: width.value,
-        height: height.value,
-      })
-      break
-    case 'glm-3':
-    case 'glm-4':
-      json = await generateByZhipuAI(llm, message, {
-        width: width.value,
-        height: height.value,
-      })
-  }
-  generating.value = false
-  app = engine.createApp(canvas.value)
-  console.log(json)
   try {
-    const scene = importScene(json, nc as any, nc as any, nc as any)
+    document.cookie = api.value
+    generating.value = false
+    await nc.useFont('https://storage.googleapis.com/skia-cdn/misc/Roboto-Regular.ttf')
+    let llm: any
+    switch (model.value) {
+      case 'gpt-4':
+        llm = createVisionAppBasedOnOpenAI({
+          openAIApiKey: api.value,
+          model: 'gpt-4'
+        })
+        break
+      case 'glm-3':
+        llm = createVisionAppBasedOnZhipuAI({
+          modelName: 'glm-3-turbo',
+          model: 'glm-3-turbo',
+          zhipuAIApiKey: api.value,
+        })
+        break
+      case 'glm-4':
+        llm = createVisionAppBasedOnZhipuAI({
+          modelName: 'glm-4',
+          model: 'glm-4',
+          zhipuAIApiKey: api.value,
+        })
+        break
+    }
+
+    generating.value = true
+    const engine = await new nc.CarEngine()
+      .init('https://unpkg.com/canvaskit-wasm@latest/bin/canvaskit.wasm')
+    console.log('engine initialized!')
+    let json: string = ''
+    switch (model.value) {
+      case 'gpt-4':
+        json = await generateByOpenAI(llm, message, {
+          width: width.value,
+          height: height.value,
+        })
+        break
+      case 'glm-3':
+      case 'glm-4':
+        json = await generateByZhipuAI(llm, message, {
+          width: width.value,
+          height: height.value,
+        })
+    }
+    app = engine.createApp(canvas.value)
+    console.log(json)
+
+    const data = JSON.parse(json) as any
+    (function process(widgetData: any) {
+      if (typeof widgetData.arguments === 'undefined') {
+        widgetData.arguments = [];
+      }
+      for (const child of widgetData.children ?? []) {
+        process(child);
+      }
+    })(data.root);
+
+
+    const scene = importScene(data, nc as any, nc as any, nc as any)
     app.checkout(scene)
     scene.elapsed = 0
     app.play()
+    codeHtml.value = await codeToHtml(json, {
+      lang: 'json',
+      theme: 'vitesse-dark',
+    })
+    generating.value = false
   } catch (err) {
     messages.value = err
     dialogOpen.value = true
+    generating.value = false
+    console.error(err)
   }
-  codeHtml.value = await codeToHtml(json, {
-    lang: 'json',
-    theme: 'vitesse-dark',
-  })
-  generating.value = false
 }
 </script>
 
@@ -112,22 +126,20 @@ async function gen(message: string) {
     <div class="flex flex-row w-full h-full">
       <div class="border flex flex-col md:w-7/12 sm:w-full">
         <div class="h-3/5 border-b flex items-center justify-center">
-          <canvas
-            :width="Number(width)"
-            :height="Number(height)"
-            class="bg-black w-full h-auto max-w-full max-h-full"
-            ref="canvas"
-            :style="{
+          <canvas :width="Number(width)" :height="Number(height)" class="bg-black w-full h-auto max-w-full max-h-full"
+            ref="canvas" :style="{
               aspectRatio: `${width} / ${height}`,
-            }"
-          ></canvas>
+            }"></canvas>
         </div>
         <div class="h-2/5 border-t">
           <div class="m-5">
             <textarea class="border rounded-lg resize-none w-full h-32" v-model="content"></textarea>
-            <button class="border rounded-lg w-28 h-8 bg-white float-right hover:bg-gray-200 select-none" @click="gen(content)" v-if="!generating">Generate</button>
-            <button class="border rounded-lg w-28 h-8 float-right bg-gray-200 select-none" disabled="true" v-if="generating">Generating...</button>
-            <button class="border rounded-lg w-28 h-8 bg-white float-left hover:bg-gray-200 select-none" @click="app.play(0)">Replay</button>
+            <button class="border rounded-lg w-28 h-8 bg-white float-right hover:bg-gray-200 select-none"
+              @click="gen(content)" v-if="!generating">Generate</button>
+            <button class="border rounded-lg w-28 h-8 float-right bg-gray-200 select-none" disabled="true"
+              v-if="generating">Generating...</button>
+            <button class="border rounded-lg w-28 h-8 bg-white float-left hover:bg-gray-200 select-none"
+              @click="app.play(0)">Replay</button>
           </div>
         </div>
       </div>

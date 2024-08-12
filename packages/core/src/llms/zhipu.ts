@@ -16,5 +16,5 @@ export async function generateByZhipuAI(llm: ChatZhipuAI, prompt: string, option
     new SystemMessage(fm),
     new HumanMessage(prompt + ',不要生成除了json数据以外的任何文字!'),
   ])
-  return callback.content.toString().replace(/(.+)?```json/, '').replace(/```(.+)?$/, '')
+  return (callback.content.toString().match(/```json.+```/s) as RegExpExecArray)[0].replace(/```json/, '').replace(/```$/, '')
 }

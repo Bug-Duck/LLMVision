@@ -27,6 +27,5 @@ export async function generateByOpenAI(llm: ChatOpenAI, prompt: string, options:
     new SystemMessage(fm),
     new HumanMessage(prompt),
   ])
-  return callback.content.toString().replace(/.+```json/, '').replace(/```.+$/, '')
+  return (callback.content.toString().match(/```json.+```/s) as RegExpExecArray)[0].replace(/```json/, '').replace(/```$/, '')
 }
-
