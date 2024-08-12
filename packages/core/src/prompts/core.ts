@@ -74,7 +74,7 @@ The JSON schema file is as follows: (WARNing: It is the json schema file of the 
 
 \`\`\`
 
-This structure describe a scene. Each scene has a root widget object, and each widget has a property \`type\` (e.g. Circle, Rect, Text, or complexer figures), a property \`arguments\` with some mandatory, a property \`options\` with some optional parameters, a property \`children\` which include the children widget of the parent widget, a property \`animations\` includes the animations that the widget has, and a property \`actions\` which express that some actions in some specific time will be executed.
+This structure describe a scene. Each scene has a root widget object, and each widget has a property \`type\` (e.g. Circle, Rect, Text, or complexer figures), a property \`arguments\` with some mandatory (WARNING: If arguments is not defined, you must give a empty array ([]) in \`arguments\`), a property \`options\` with some optional parameters, a property \`children\` which include the children widget of the parent widget, a property \`animations\` includes the animations that the widget has, and a property \`actions\` which express that some actions in some specific time will be executed.
 
 All coordinates are relative to the coordinates of their parent widget, and the principle of "the child moves when the parent moves, and the parent does not move when the child moves" is maintained.
 
