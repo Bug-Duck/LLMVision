@@ -20,8 +20,10 @@ LLMVision是一个数学动画和数据可视化动画生成器AI,基于[Newcar�
 3. Input the description of animation you want to generate
 4. Click "Generate" button, and keep waiting until generating finish
 
+---
+
 1. 选择模型
-2 填入对应的模型的API Key
+2. 填入对应的模型的API Key
 3. 输入你想要生成的动画
 4. 点击"Generate"，等待生成完毕
 
