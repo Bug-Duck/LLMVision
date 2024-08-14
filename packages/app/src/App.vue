@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { generateByZhipuAI, createVisionAppBasedOnZhipuAI, createVisionAppBasedOnOpenAI, generateByOpenAI } from '@llmvision/core'
+import { generateByZhipuAI, createVisionAppBasedOnZhipuAI, createVisionAppBasedOnOpenAI, generateByOpenAI, generateByAnthropic, createVisionAppBasedOnAnthropic } from '@llmvision/core'
 import * as nc from 'newcar'
 import * as math from '@newcar/mod-math'
 import { importScene } from '@newcar/json'
 import { ref, watch } from 'vue'
 import { codeToHtml } from 'shiki'
+import config from './config'
 
 const model = ref('gpt-3.5')
 const api = ref(document.cookie)
@@ -19,6 +20,7 @@ const height = ref(900)
 
 const dialogOpen = ref(false)
 const messages = ref()
+
 watch(dialogOpen, (open) => {
   if (open) {
     setTimeout(() => {
@@ -37,71 +39,94 @@ async function gen(message: string) {
     generating.value = false
     await nc.useFont('https://storage.googleapis.com/skia-cdn/misc/Roboto-Regular.ttf')
     let llm: any
-    switch (model.value) {
-      case 'gpt-4':
-        llm = createVisionAppBasedOnOpenAI({
-          openAIApiKey: api.value,
-          model: 'gpt-4'
-        })
-        break
-      case 'glm-3':
-        llm = createVisionAppBasedOnZhipuAI({
-          modelName: 'glm-3-turbo',
-          model: 'glm-3-turbo',
-          zhipuAIApiKey: api.value,
-        })
-        break
-      case 'glm-4':
-        llm = createVisionAppBasedOnZhipuAI({
-          modelName: 'glm-4',
-          model: 'glm-4',
-          zhipuAIApiKey: api.value,
-        })
-        break
+    if (config.mode === 'browser') {
+      switch (model.value) {
+        case 'gpt-4':
+          llm = createVisionAppBasedOnOpenAI({
+            openAIApiKey: api.value,
+            model: 'gpt-4'
+          })
+          break
+        case 'glm-3':
+          llm = createVisionAppBasedOnZhipuAI({
+            modelName: 'glm-3-turbo',
+            model: 'glm-3-turbo',
+            zhipuAIApiKey: api.value,
+          })
+          break
+        case 'glm-4':
+          llm = createVisionAppBasedOnZhipuAI({
+            modelName: 'glm-4',
+            model: 'glm-4',
+            zhipuAIApiKey: api.value,
+          })
+          break
+        case 'claude-3':
+          llm = createVisionAppBasedOnAnthropic({
+            anthropicApiKey: api.value,
+            model: 'claude-3-sonnet-20240229',
+          })
+          break
+      }
     }
-
     generating.value = true
     const engine = await new nc.CarEngine()
       .init('https://unpkg.com/canvaskit-wasm@latest/bin/canvaskit.wasm')
     console.log('engine initialized!')
     let json: string = ''
-    switch (model.value) {
-      case 'gpt-4':
-        json = await generateByOpenAI(llm, message, {
-          width: width.value,
-          height: height.value,
-          mods: {
-            math: getStatus().Mathematics
-          }
-        })
-        break
-      case 'glm-3':
-      case 'glm-4':
-        json = await generateByZhipuAI(llm, message, {
-          width: width.value,
-          height: height.value,
-          mods: {
-            math: getStatus().Mathematics
-          }
-        })
-        console.log(getStatus().Mathematics)
-        break
+    if (config.mode === 'browser') {
+      switch (model.value) {
+        case 'gpt-4':
+          json = await generateByOpenAI(llm, message, {
+            width: width.value,
+            height: height.value,
+            mods: {
+              math: getStatus().Mathematics
+            }
+          })
+          break
+        case 'glm-3':
+        case 'glm-4':
+          json = await generateByZhipuAI(llm, message, {
+            width: width.value,
+            height: height.value,
+            mods: {
+              math: getStatus().Mathematics
+            }
+          })
+          break
+        case 'claude-3':
+          json = await generateByAnthropic(llm, message, {
+            width: width.value,
+            height: height.value,
+            mods: {
+              math: getStatus().Mathematics
+            }
+          })
+      }
+    } else if (config.mode === 'server') {
+      json = await (await fetch(`${config.backend}/generate/${model.value}`, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          prompt: message,
+          options: {
+            width: width.value,
+            height: height.value,
+            mods: {
+              math: getStatus().Mathematics
+            }
+          },
+          key: api.value
+        }),
+        method: 'POST',
+      })).text()
     }
     app = engine.createApp(canvas.value)
     console.log(json)
 
-    const data = JSON.parse(json) as any
-    (function process(widgetData: any) {
-      if (typeof widgetData.arguments === 'undefined') {
-        widgetData.arguments = [];
-      }
-      for (const child of widgetData.children ?? []) {
-        process(child);
-      }
-    })(data.root);
-
-
-    const scene = importScene(data, {
+    const scene = importScene(json, {
       ...(nc as any),
       ...math
     }, {
@@ -191,6 +216,7 @@ function getStatus() {
               <option value="gpt-4">GPT-4</option>
               <option value="glm-3">GLM-3</option>
               <option value="glm-4">GLM-4</option>
+              <option value="claude-3">Claude-3</option>
             </select>
           </div>
           <div class="py-3">
@@ -230,4 +256,3 @@ function getStatus() {
     </div>
   </div>
 </template>
-

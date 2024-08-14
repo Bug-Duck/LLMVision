@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@langchain/anthropic": "^0.2.15",
     "@langchain/baidu-qianfan": "^0.0.2",
     "@langchain/community": "^0.2.25",
     "@langchain/core": "^0.2.22",

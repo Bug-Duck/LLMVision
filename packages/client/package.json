@@ -1,0 +1,20 @@
+{
+  "name": "@llmvision/client",
+  "version": "1.0.0",
+  "description": "The backend code of LLMVision",
+  "scripts": {
+    "dev": "tsup --watch",
+    "start": "node dist/index.js",
+    "build": "tsup"
+  },
+  "keywords": [],
+  "author": "",
+  "dependencies": {
+    "@llmvision/core": "workspace:*",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "type": "module"
+}
