@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { generateByZhipuAI, createVisionAppBasedOnZhipuAI, createVisionAppBasedOnOpenAI, generateByOpenAI } from '@llmvision/core'
 import * as nc from 'newcar'
+import * as math from '@newcar/mod-math'
 import { importScene } from '@newcar/json'
 import { ref, watch } from 'vue'
 import { codeToHtml } from 'shiki'
@@ -69,6 +70,9 @@ async function gen(message: string) {
         json = await generateByOpenAI(llm, message, {
           width: width.value,
           height: height.value,
+          mods: {
+            math: getStatus().Mathematics
+          }
         })
         break
       case 'glm-3':
@@ -76,7 +80,12 @@ async function gen(message: string) {
         json = await generateByZhipuAI(llm, message, {
           width: width.value,
           height: height.value,
+          mods: {
+            math: getStatus().Mathematics
+          }
         })
+        console.log(getStatus().Mathematics)
+        break
     }
     app = engine.createApp(canvas.value)
     console.log(json)
@@ -92,8 +101,17 @@ async function gen(message: string) {
     })(data.root);
 
 
-    const scene = importScene(data, nc as any, nc as any, nc as any)
-    app.checkout(scene)
+    const scene = importScene(data, {
+      ...(nc as any),
+      ...math
+    }, {
+      ...(nc as any),
+      ...math
+    }, {
+      ...(nc as any),
+      ...math
+    })
+    app.checkout(scene as unknown as nc.Scene)
     scene.elapsed = 0
     app.play()
     codeHtml.value = await codeToHtml(json, {
@@ -107,6 +125,28 @@ async function gen(message: string) {
     generating.value = false
     console.error(err)
   }
+}
+
+const modsList = ref([
+  'Mathematics',
+  'Chart',
+  'Table',
+  'Layout',
+  'Geometry',
+  'Skottie',
+  'SVG',
+  'Markdown',
+])
+
+function getStatus() {
+  const result: Record<string, boolean> = {}
+  for (const key of modsList.value) {
+    if ((document.getElementById(key) as HTMLInputElement).checked) {
+      result[key] = true
+    }
+  }
+
+  return result
 }
 </script>
 
@@ -123,15 +163,15 @@ async function gen(message: string) {
         <div class="text-xl font-mono text-sky-300"><a href="https://github.com/Bug-Duck/LLMVision">GitHub</a></div>
       </div>
     </div>
-    <div class="flex flex-row w-full h-full">
-      <div class="border flex flex-col md:w-7/12 sm:w-full">
-        <div class="h-3/5 border-b flex items-center justify-center">
+    <div class="flex flex-col md:flex-row w-full h-full md:overflow-hidden overflow-y-auto">
+      <div class="flex flex-col md:w-7/12 sm:w-full md:border">
+        <div class="h-3/5 md:border-b flex items-center justify-center">
           <canvas :width="Number(width)" :height="Number(height)" class="bg-black w-full h-auto max-w-full max-h-full"
             ref="canvas" :style="{
               aspectRatio: `${width} / ${height}`,
             }"></canvas>
         </div>
-        <div class="h-2/5 border-t">
+        <div class="h-2/5 md:border-t">
           <div class="m-5">
             <textarea class="border rounded-lg resize-none w-full h-32" v-model="content"></textarea>
             <button class="border rounded-lg w-28 h-8 bg-white float-right hover:bg-gray-200 select-none"
@@ -143,12 +183,11 @@ async function gen(message: string) {
           </div>
         </div>
       </div>
-      <div class="border md:w-5/12 sm:block overflow-y-scroll">
+      <div class="md:w-5/12 md:overflow-y-scroll sm:w-full sm:overflow-y-auto p-0 md:border">
         <div class="m-5">
           <div class="py-3">
             <h1 class="font-mono">Model</h1>
             <select class="border rounded-lg w-full h-8 bg-white" v-model="model">
-              <!-- <option value="gpt-3.5">GPT-3.5</option> -->
               <option value="gpt-4">GPT-4</option>
               <option value="glm-3">GLM-3</option>
               <option value="glm-4">GLM-4</option>
@@ -168,6 +207,16 @@ async function gen(message: string) {
               <input class="border rounded-lg w-full h-8 bg-white" v-model="height" value="900">
             </div>
           </div>
+          <div class="py-3 flex flex-col">
+            <div class="flex flex-wrap">
+              <div v-for="(mod, index) in modsList" :key="index" class="w-1/2 p-2">
+                <label>
+                  <input type="checkbox" :id="mod">
+                  {{ mod }}
+                </label>
+              </div>
+            </div>
+          </div>
           <div class="py-3 flex flex-row">
             <div v-html="codeHtml" class="w-full border-lg"></div>
           </div>
@@ -181,3 +230,4 @@ async function gen(message: string) {
     </div>
   </div>
 </template>
+

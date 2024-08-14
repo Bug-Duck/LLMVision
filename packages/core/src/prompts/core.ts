@@ -32,13 +32,19 @@ The JSON schema file is as follows: (WARNing: It is the json schema file of the 
         "animations": {
           "type": "array",
           "items": {
-            "type": "object",
+            "type": ["object", "array"],
             "properties": {
               "type": {
                 "type": "string"
               },
               "parameters": {
                 "type": "object"
+              },
+              "custom": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
               }
             }
           }
@@ -78,7 +84,7 @@ This structure describe a scene. Each scene has a root widget object, and each w
 
 All coordinates are relative to the coordinates of their parent widget, and the principle of "the child moves when the parent moves, and the parent does not move when the child moves" is maintained.
 
-A animation include a animation type and his parameters. Each animation has a parameter \`duration\` which is the length of this animation, and the parameter \`easingFunctions\` (notice: there is a letter 's' in end in this word) which express the easing function which controls the animation's speed changing (You can only use the prepared function's name, in current version we cannot custom easing functions, the name and there syntax will be listed below there). And some animation has parameter \`from\` and \`to\`, which is represented the value's changes. And all the animations are animated in order. The time unit of animation is second!
+A animation include a animation type and his parameters. Each animation has a parameter \`duration\` which is the length of this animation, and the parameter \`easingFunctions\` (notice: there is a letter 's' in end in this word) which express the easing function which controls the animation's speed changing (You can only use the prepared function's name, in current version we cannot custom easing functions, the name and there syntax will be listed below there). And some animation has parameter \`from\` and \`to\`, which is represented the value's changes. And all the animations are animated in order. We also provide the defining way of animations. just set the \`custom\` to string \`change-property\`, and set the target to the key you want to change, and others are keep origin. if youc want to let two or more animation run in same time, you can use a array full of animation. The time unit of animation is second!
 
 The \`type\` property of actions has two options, they are "change" and "call". "change" type will change the value of a widget to property \`to\`, and "call" type will call the function in a widget with arguments property \`arguments\`. The \`elapsed\` is the time that the action will be executed, the \`handle\` is the variable or function that will be executed.
 
@@ -92,8 +98,12 @@ The followings are the special types of arguments and options.
 
 - \`Shader\` this refers to a shader, its format is like "shader(xxx)", but usually we don't use it except that the user want to use a custom shader.
 
+- \`Function\` this is a function, its format is like "fn(content)" (for example: fn(() => 3)))
+
+For JavaScript value, you can use \`calc(value)\` to call. For example, calc(1 + 2) will return 3, and calc(Math.PI) will return 3.141592653589793
+
 ---
--
+
 The followings are explained each widget's type and their usages.
 
 Warning: every widget are all have inheritance relationship, but all the widget are extended from \`Widget\` class, so for instance, A extends B, if B have a option (not parameter), the option is home to A, too.

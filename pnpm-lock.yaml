@@ -28,8 +28,11 @@ importers:
         specifier: workspace:*
         version: link:../core
       '@newcar/json':
-        specifier: 2.0.0-beta.8
-        version: 2.0.0-beta.8(canvaskit-wasm@0.39.1)
+        specifier: 2.0.0-beta.11
+        version: 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+      '@newcar/mod-math':
+        specifier: 2.0.0-beta.11
+        version: 2.0.0-beta.11(canvaskit-wasm@0.39.1)
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.41)
@@ -37,8 +40,8 @@ importers:
         specifier: ^0.39.1
         version: 0.39.1
       newcar:
-        specifier: 2.0.0-beta.8
-        version: 2.0.0-beta.8(canvaskit-wasm@0.39.1)
+        specifier: 2.0.0-beta.11
+        version: 2.0.0-beta.11(canvaskit-wasm@0.39.1)
       shiki:
         specifier: ^1.12.1
         version: 1.12.1
@@ -916,26 +919,31 @@ packages:
     resolution: {integrity: sha512-cXWgKE3sdWLSqAa8ykbCcUsUF1Kyr5J3HOWYGuobhPEycXW4WI++d5DhzdpL238mzoEXTi90VqfSCra37l5YqA==}
     engines: {node: '>=18'}
 
-  '@newcar/basic@2.0.0-beta.8':
-    resolution: {integrity: sha512-R5jGjb1E4PXW18IqP0MtQb+vIJje7uxlQ/N4glM4lW5+kW7ya8K00cg1nTjP7VO85OYb1FtK7Yzclz0h9bAjFA==}
+  '@newcar/basic@2.0.0-beta.11':
+    resolution: {integrity: sha512-KuOCJ4HRTwCvcBAbOUUKW0YxaA9Ql+2Q4KZxpbe7JCqkIc8/OVYgGXs1vxkYfgWtlsuZ/N+E4iHv0tCGPuyiSg==}
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
-  '@newcar/core@2.0.0-beta.8':
-    resolution: {integrity: sha512-5vu4GzOvXTgUDleTCJjUSLolwyygnVoJ6TvyKNCgGkXVTbX+IXfT/3eMgpZUBH7erVwNXjimUVKMbj3NjaxBZw==}
+  '@newcar/core@2.0.0-beta.11':
+    resolution: {integrity: sha512-qC0a6Ln+DDPO/sjVIXtaFPaAg3eRmz4WL98v9QK33wr56Z5BoXaALBVPOPQz1QyV1QBx2aFQl9foE9rkb/dOXQ==}
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
-  '@newcar/json@2.0.0-beta.8':
-    resolution: {integrity: sha512-Gkavk4fJt5+saImighTcLm+tA76RFC1SEoKjORJ5lrjgS8LRkwo6ar/DbhE7sIwigSlB7tDlH41YUKRHHT+Ysg==}
+  '@newcar/json@2.0.0-beta.11':
+    resolution: {integrity: sha512-OwR58/t+tOLyZThpDogSL29e4GAdsNXOWIyGe4RI1LtIFtzj8aYGpDXRtULEgulYD32LD81Uo4qaUQw/pXOmEw==}
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
-  '@newcar/recorder@2.0.0-beta.8':
-    resolution: {integrity: sha512-c0cFxgsDtYgSlEmkWRljxnsNK4irCBSxIaIHrjiLdEqMXqsSe4eTTmCoiSvhCGaqLzshT8r+IQ1mInAVRKhfeg==}
+  '@newcar/mod-math@2.0.0-beta.11':
+    resolution: {integrity: sha512-9tXKIEWxmgOpkApeiX/GDxmgimRijkyOx62WBZhn+iPhip8yf17HbU6aS+ff5H+xnBpad6YfWJmJ8Avcd1MrBw==}
+    peerDependencies:
+      canvaskit-wasm: '>=0.39.1'
 
-  '@newcar/utils@2.0.0-beta.8':
-    resolution: {integrity: sha512-T02M+DQkS0ZfCn2qJbAQYMt5IAp1cl0csXFXeyXIhCtwlYXF3r/JcfHESwKDHgomWB3NA9/VizHh8XWZ+PxHBA==}
+  '@newcar/recorder@2.0.0-beta.11':
+    resolution: {integrity: sha512-BoqjMAZFeiftvBaz9ia99WzOvQlOUoD6SlAbxea9+SOoK0UdzZ7JuagokovGtkrHPARQ2LxxqzQWwb/dKS5dGg==}
+
+  '@newcar/utils@2.0.0-beta.11':
+    resolution: {integrity: sha512-34j6m1EwXUuoLBOiDHvzaqd60IINMKXt1a2gZ9nBeik3Py3n8/iW/r5Oi7tonvv2tLTO0g95akTopo3l1yXSNA==}
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
@@ -1428,6 +1436,10 @@ packages:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
     engines: {node: '>= 6'}
 
+  commander@9.2.0:
+    resolution: {integrity: sha512-e2i4wANQiSXgnrBlIatyHtP1odfUp0BbV5Y5nEGbxtIrStkEOAAzCUirvLBNXHLr7kwLvJl6V+4V3XV9x7Wd9w==}
+    engines: {node: ^12.20.0 || >=14}
+
   commands-events@1.0.4:
     resolution: {integrity: sha512-HdP/+1Anoc7z+6L2h7nd4Imz54+LW+BjMGt30riBZrZ3ZeP/8el93wD8Jj8ltAaqVslqNgjX6qlhSBJwuDSmpg==}
 
@@ -1699,6 +1711,10 @@ packages:
     resolution: {integrity: sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==}
     engines: {node: '>=0.8.0'}
 
+  esm@3.2.25:
+    resolution: {integrity: sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==}
+    engines: {node: '>=6'}
+
   estree-walker@2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
 
@@ -1843,6 +1859,9 @@ packages:
   get-symbol-description@1.0.2:
     resolution: {integrity: sha512-g0QYk1dZBxGwk+Ngc+ltRH2IBp2f7zBkBMBJZCDerh6EhlhSR6+9irMCuT/09zD6qkarHUSn529sK/yL4S27mg==}
     engines: {node: '>= 0.4'}
+
+  gl-matrix@3.4.3:
+    resolution: {integrity: sha512-wcCp8vu8FT22BnvKVPjXa/ICBWRq/zjFfdofZy1WSpQZpphblv12/bOQLBC1rMM7SGOFS9ltVmKOHil5+Ml7gA==}
 
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -2396,6 +2415,9 @@ packages:
   magic-string@0.30.11:
     resolution: {integrity: sha512-+Wri9p0QHMy+545hKww7YAu5NyzF8iomPL/RQazugQ9+Ez4Ic3mERMd8ZTX5rfK944j+560ZJi8iAwgak1Ac7A==}
 
+  mathjax-full@3.2.2:
+    resolution: {integrity: sha512-+LfG9Fik+OuI8SLwsiR02IVdjcnRCy5MufYLi0C3TdMT56L/pjB0alMVGgoWJF8pN9Rc7FESycZB9BMNWIid5w==}
+
   md5.js@1.3.5:
     resolution: {integrity: sha512-xitP+WxNPcTTOgnTJcrhM0xvdPepipPSf3I8EIpGKeFLjt3PlJLIDG3u8EX53ZIubkb+5U2+3rELYpEhHhzdkg==}
 
@@ -2416,6 +2438,9 @@ packages:
   methods@1.1.2:
     resolution: {integrity: sha512-iclAHeNqNm68zFtnZ0e+1L2yUIdvzNoauKU4WBA3VvH/vPFieF7qfRlwUZU+DA9P9bPXIS90ulxoUoCH23sV2w==}
     engines: {node: '>= 0.6'}
+
+  mhchemparser@4.2.1:
+    resolution: {integrity: sha512-kYmyrCirqJf3zZ9t/0wGgRZ4/ZJw//VwaRVGA75C4nhE60vtnIzhl9J9ndkX/h6hxSN7pjg/cE0VxbnNM+bnDQ==}
 
   micromatch@4.0.7:
     resolution: {integrity: sha512-LPP/3KorzCwBxfeUuZmaR6bG2kdeHSbe0P2tY3FLRU4vYrjYz5hI4QZwV0njUx3jeuKe67YukQ1LSPZBKDqO/Q==}
@@ -2463,6 +2488,9 @@ packages:
   mitt@3.0.1:
     resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
 
+  mj-context-menu@0.6.1:
+    resolution: {integrity: sha512-7NO5s6n10TIV96d4g2uDpG7ZDpIhMh0QNfGdJw/W47JswFcosz457wqz/b5sAKvl12sxINGFCn80NZHKwxQEXA==}
+
   moment@2.22.2:
     resolution: {integrity: sha512-LRvkBHaJGnrcWvqsElsOhHCzj8mU39wLx5pQ0pc6s153GynCTsPdGdqsVNKAQD9sKnWj11iF7TZx9fpLwdD3fw==}
 
@@ -2498,8 +2526,8 @@ packages:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
     engines: {node: '>= 0.6'}
 
-  newcar@2.0.0-beta.8:
-    resolution: {integrity: sha512-ewE93CnLNuqkitMd5E6gLY1+Vu7FWNyF1yABBkH/AC+JtG/wYhvRALjtLztAiCeoFxhdUu8+iWAwnN+oxEzKGQ==}
+  newcar@2.0.0-beta.11:
+    resolution: {integrity: sha512-m1OLJgSXodY3a2FZ/u85zERsRQEiK86XGzSdZnMLZLv1Ay4ScP4JrrjuJxZtMY5IORD62zBjONpfrkDoO59psA==}
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
@@ -2984,6 +3012,10 @@ packages:
     resolution: {integrity: sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA==}
     engines: {node: '>= 8'}
 
+  speech-rule-engine@4.0.7:
+    resolution: {integrity: sha512-sJrL3/wHzNwJRLBdf6CjJWIlxC04iYKkyXvYSVsWVOiC2DSkHmxsqOhEeMsBA9XK+CHuNcsdkbFDnoUfAsmp9g==}
+    hasBin: true
+
   split2@3.0.0:
     resolution: {integrity: sha512-Cp7G+nUfKJyHCrAI8kze3Q00PFGEG1pMgrAlTFlDbn+GW24evSZHJuMl+iUJx1w/NTRDeBiTgvwnf6YOt94FMw==}
 
@@ -3068,6 +3100,12 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
+  svg-numbers@0.1.1:
+    resolution: {integrity: sha512-fmKrzrZbFRuPiEtj4HyJiYF3picV7FWQ3QXtcmClKDs/Wc718wOaGXHCN650m4Kjm6NmAYLUbwTvHDdWrmeklg==}
+
+  svg-path@0.2.1:
+    resolution: {integrity: sha512-WrF7i9l3BdqCEBAw7/60iijn4NAGR5FdjHwv9rd/lFlV3delNOF3uQbG1TTRSM2/YE7yIi3UrzAMdqKwL4Yghw==}
+
   tailwind@4.0.0:
     resolution: {integrity: sha512-LlUNoD/5maFG1h5kQ6/hXfFPdcnYw+1Z7z+kUD/W/E71CUMwcnrskxiBM8c3G8wmPsD1VvCuqGYMHviI8+yrmg==}
 
@@ -3075,6 +3113,9 @@ packages:
     resolution: {integrity: sha512-1SEOvRr6sSdV5IDf9iC+NU4dhwdqzF4zKKq3sAbasUWHEM6lsMhX+eNN5gkPx1BvLFEnZQEUFbXnGj8Qlp83Pg==}
     engines: {node: '>=14.0.0'}
     hasBin: true
+
+  tex-to-svg@0.2.0:
+    resolution: {integrity: sha512-YkP5V4O3u+i2odO5ETEISjVTemfzrx+YeG/XHXRoq3sfL0p8q4zDdlP/h+mna/4tEu6EylJOKzJws3iOnzU/rA==}
 
   thenify-all@1.6.0:
     resolution: {integrity: sha512-RNxQH/qI8/t3thXJDwcstUO4zeqo64+Uy/+sNVRBx4Xn2OX+OZ9oP+iJnNFqplFra2ZUVeKCSa2oVWi3T4uVmA==}
@@ -3324,6 +3365,9 @@ packages:
     engines: {node: '>= 8'}
     hasBin: true
 
+  wicked-good-xpath@1.3.0:
+    resolution: {integrity: sha512-Gd9+TUn5nXdwj/hFsPVx5cuHHiF5Bwuc30jZ4+ronF1qHK5O7HD0sgmXWSEgwKquT3ClLoKPVbO6qGwVwLzvAw==}
+
   wrap-ansi@7.0.0:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
     engines: {node: '>=10'}
@@ -3342,6 +3386,10 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+
+  xmldom-sre@0.1.31:
+    resolution: {integrity: sha512-f9s+fUkX04BxQf+7mMWAp5zk61pciie+fFLC9hX9UVvCeJQfNHRHXpeo5MPcR0EUf57PYLdt+ZO4f3Ipk2oZUw==}
+    engines: {node: '>=0.1'}
 
   xtend@4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
@@ -3906,28 +3954,39 @@ snapshots:
       - langchain
       - openai
 
-  '@newcar/basic@2.0.0-beta.8(canvaskit-wasm@0.39.1)':
+  '@newcar/basic@2.0.0-beta.11(canvaskit-wasm@0.39.1)':
     dependencies:
-      '@newcar/core': 2.0.0-beta.8(canvaskit-wasm@0.39.1)
-      '@newcar/utils': 2.0.0-beta.8(canvaskit-wasm@0.39.1)
+      '@newcar/core': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+      '@newcar/utils': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
       canvaskit-wasm: 0.39.1
 
-  '@newcar/core@2.0.0-beta.8(canvaskit-wasm@0.39.1)':
+  '@newcar/core@2.0.0-beta.11(canvaskit-wasm@0.39.1)':
     dependencies:
-      '@newcar/utils': 2.0.0-beta.8(canvaskit-wasm@0.39.1)
-      canvaskit-wasm: 0.39.1
-      mitt: 3.0.1
-
-  '@newcar/json@2.0.0-beta.8(canvaskit-wasm@0.39.1)':
-    dependencies:
-      '@newcar/core': 2.0.0-beta.8(canvaskit-wasm@0.39.1)
-      '@newcar/utils': 2.0.0-beta.8(canvaskit-wasm@0.39.1)
+      '@newcar/utils': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
       canvaskit-wasm: 0.39.1
       mitt: 3.0.1
 
-  '@newcar/recorder@2.0.0-beta.8': {}
+  '@newcar/json@2.0.0-beta.11(canvaskit-wasm@0.39.1)':
+    dependencies:
+      '@newcar/basic': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+      '@newcar/core': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+      '@newcar/utils': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+      canvaskit-wasm: 0.39.1
+      mitt: 3.0.1
 
-  '@newcar/utils@2.0.0-beta.8(canvaskit-wasm@0.39.1)':
+  '@newcar/mod-math@2.0.0-beta.11(canvaskit-wasm@0.39.1)':
+    dependencies:
+      '@newcar/basic': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+      '@newcar/core': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+      '@newcar/utils': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+      canvaskit-wasm: 0.39.1
+      gl-matrix: 3.4.3
+      svg-path: 0.2.1
+      tex-to-svg: 0.2.0
+
+  '@newcar/recorder@2.0.0-beta.11': {}
+
+  '@newcar/utils@2.0.0-beta.11(canvaskit-wasm@0.39.1)':
     dependencies:
       canvaskit-wasm: 0.39.1
       colorparsley: 0.1.8
@@ -4495,6 +4554,8 @@ snapshots:
 
   commander@4.1.1: {}
 
+  commander@9.2.0: {}
+
   commands-events@1.0.4:
     dependencies:
       '@babel/runtime': 7.2.0
@@ -4855,6 +4916,8 @@ snapshots:
 
   escape-string-regexp@1.0.5: {}
 
+  esm@3.2.25: {}
+
   estree-walker@2.0.2: {}
 
   etag@1.8.1: {}
@@ -5090,6 +5153,8 @@ snapshots:
       call-bind: 1.0.7
       es-errors: 1.3.0
       get-intrinsic: 1.2.4
+
+  gl-matrix@3.4.3: {}
 
   glob-parent@5.1.2:
     dependencies:
@@ -5508,6 +5573,13 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  mathjax-full@3.2.2:
+    dependencies:
+      esm: 3.2.25
+      mhchemparser: 4.2.1
+      mj-context-menu: 0.6.1
+      speech-rule-engine: 4.0.7
+
   md5.js@1.3.5:
     dependencies:
       hash-base: 3.1.0
@@ -5523,6 +5595,8 @@ snapshots:
   merge2@1.4.1: {}
 
   methods@1.1.2: {}
+
+  mhchemparser@4.2.1: {}
 
   micromatch@4.0.7:
     dependencies:
@@ -5558,6 +5632,8 @@ snapshots:
 
   mitt@3.0.1: {}
 
+  mj-context-menu@0.6.1: {}
+
   moment@2.22.2: {}
 
   morgan@1.9.1:
@@ -5590,13 +5666,13 @@ snapshots:
 
   negotiator@0.6.3: {}
 
-  newcar@2.0.0-beta.8(canvaskit-wasm@0.39.1):
+  newcar@2.0.0-beta.11(canvaskit-wasm@0.39.1):
     dependencies:
-      '@newcar/basic': 2.0.0-beta.8(canvaskit-wasm@0.39.1)
-      '@newcar/core': 2.0.0-beta.8(canvaskit-wasm@0.39.1)
-      '@newcar/json': 2.0.0-beta.8(canvaskit-wasm@0.39.1)
-      '@newcar/recorder': 2.0.0-beta.8
-      '@newcar/utils': 2.0.0-beta.8(canvaskit-wasm@0.39.1)
+      '@newcar/basic': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+      '@newcar/core': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+      '@newcar/json': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+      '@newcar/recorder': 2.0.0-beta.11
+      '@newcar/utils': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
       canvaskit-wasm: 0.39.1
 
   nocache@2.0.0: {}
@@ -6134,6 +6210,12 @@ snapshots:
     dependencies:
       whatwg-url: 7.1.0
 
+  speech-rule-engine@4.0.7:
+    dependencies:
+      commander: 9.2.0
+      wicked-good-xpath: 1.3.0
+      xmldom-sre: 0.1.31
+
   split2@3.0.0:
     dependencies:
       readable-stream: 3.6.2
@@ -6235,6 +6317,12 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
+  svg-numbers@0.1.1: {}
+
+  svg-path@0.2.1:
+    dependencies:
+      svg-numbers: 0.1.1
+
   tailwind@4.0.0:
     dependencies:
       '@babel/runtime': 7.3.4
@@ -6295,6 +6383,10 @@ snapshots:
       sucrase: 3.35.0
     transitivePeerDependencies:
       - ts-node
+
+  tex-to-svg@0.2.0:
+    dependencies:
+      mathjax-full: 3.2.2
 
   thenify-all@1.6.0:
     dependencies:
@@ -6541,6 +6633,8 @@ snapshots:
     dependencies:
       isexe: 2.0.0
 
+  wicked-good-xpath@1.3.0: {}
+
   wrap-ansi@7.0.0:
     dependencies:
       ansi-styles: 4.3.0
@@ -6556,6 +6650,8 @@ snapshots:
   ws@6.2.0:
     dependencies:
       async-limiter: 1.0.1
+
+  xmldom-sre@0.1.31: {}
 
   xtend@4.0.2: {}
 
