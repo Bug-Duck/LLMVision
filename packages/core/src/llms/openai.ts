@@ -3,6 +3,7 @@ import { ChatOpenAI } from '@langchain/openai'
 import { template as core } from '../prompts/core'
 import { template as fm } from '../prompts/frequency-mistake'
 import { template as math } from '../prompts/mod-math'
+import { template as skills } from "../prompts/skills"
 import { ProgramOptions } from './interfaces'
 
 export interface OpenAIOptions {
@@ -35,6 +36,7 @@ export async function generateByOpenAI(llm: ChatOpenAI, prompt: string, options:
     ...mods,
     new SystemMessage(`Known that the width of the canvas is ${options.width ?? 1600}, the height is ${options.height ?? 900}, the background color is black.`),
     new SystemMessage(fm),
+    new SystemMessage(skills),
     new HumanMessage(prompt),
   ])
   return (callback.content.toString().match(/```json.+```/s) as RegExpExecArray)[0]
