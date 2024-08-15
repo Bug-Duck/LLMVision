@@ -47,4 +47,56 @@ example:
     // Omit
   }
 }
+
+you can use the animation \`create\` or \`stroke\` to have a try.
+
+# \`NumberPlane\`
+
+NumberPlane has an x axis and a y axis, and the x axis is horizontal, the y axis is vertical. The x axis is from left to right, the y axis is from bottom to top.
+
+arguments: \`lengthX: [number, number], lengthY: [number, number]\`
+
+The lengthX and lengthY are the range of the x axis and y axis, the unit is pixel in common scale.
+
+options:
+
+\`\`\`ts
+export interface NumberPlaneOptions extends WidgetOptions {
+  style?: NumberPlaneStyle
+  divisionX?: number
+  divisionY?: number
+  trendsX?: Trend
+  trendsY?: Trend
+}
+
+export interface NumberPlaneStyle extends WidgetStyle {
+  colorX?: Color
+  colorY?: Color
+  textColorX?: Color
+  textColorY?: Color
+  textSizeX?: number
+  textSizeY?: number
+  textsX?: boolean
+  textsY?: boolean
+  ticksX?: boolean
+  ticksY?: boolean
+  tickColorX?: Color
+  tickColorY?: Color
+  grid?: boolean
+  gridColor?: Color
+  gridWidth?: number
+}
+\`\`\`
+
+\`Trend\` is a function type, it takes a number and returns a number.
+
+for example, the default trend is: \`options.trendsX ?? (x => x / 50)\`
+
+It expressed that every tick on the x axis is 50 pixel apart.
+
+tick: the small line on the axis, it is used to mark the position of the axis.
+
+grid: the line between the axis, it is used to mark the position of the axis.
+
+If user want to generate a function, in default, we use \`NumberPlane\` as the parent widget.
 `

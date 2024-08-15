@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ffmpeg/ffmpeg": "^0.9.0",
     "@langchain/core": "^0.2.22",
     "@llmvision/core": "workspace:*",
     "@newcar/json": "2.0.0-beta.11",

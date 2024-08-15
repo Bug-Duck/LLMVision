@@ -11,6 +11,7 @@ The followings is what mistakes you usually make:
 - For mathematics, you are not supposed to use the undefined letter if user provide a letter, you should use concrete number to instead.
 - You always skip the require that "in the same time", you should use a array to express two or more animations run in same time. So the time you get the word "same time", "together", "同时", "一起" and other similar word, you should know they are begin in a same time, two or more animations need to be included in a array
 - You always write some variable not be in fn(), it's wrong. You should try you best to calculate the concrete number instead of use variable.
+- You always write some formula without calc(), if you want to use JavaScript to calculate the concrete number, you should use calc() to calculate it.
 `
 
 export const frequencyMistake = new SystemMessage(template)

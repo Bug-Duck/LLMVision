@@ -6,6 +6,7 @@ import { importScene } from '@newcar/json'
 import { ref, watch } from 'vue'
 import { codeToHtml } from 'shiki'
 import config from './config'
+import { exportToVideo } from './export'
 
 const model = ref('gpt-3.5')
 const api = ref(document.cookie)
@@ -21,6 +22,13 @@ const height = ref(900)
 const dialogOpen = ref(false)
 const messages = ref()
 
+const exports = ref(false)
+const couldDownload = ref(false)
+const download = ref('')
+
+const fps = ref(60)
+const duration = ref(10)
+
 watch(dialogOpen, (open) => {
   if (open) {
     setTimeout(() => {
@@ -32,6 +40,19 @@ watch(dialogOpen, (open) => {
 const generating = ref(false)
 
 let app: nc.App
+
+async function exportOut(duration: number, fps: number) {
+  try {
+    exports.value = true
+    download.value = await exportToVideo(app, duration, fps)
+    couldDownload.value = true
+    exports.value = false
+  } catch (e) {
+    exports.value = false
+    messages.value = e
+    console.error(e)
+  }
+}
 
 async function gen(message: string) {
   try {
@@ -61,6 +82,13 @@ async function gen(message: string) {
             zhipuAIApiKey: api.value,
           })
           break
+        case 'glm-4-0520':
+          llm = createVisionAppBasedOnZhipuAI({
+            modelName: 'glm-4-0520',
+            model: 'glm-4-0520',
+            zhipuAIApiKey: api.value,
+          })
+          break
         case 'claude-3':
           llm = createVisionAppBasedOnAnthropic({
             anthropicApiKey: api.value,
@@ -87,6 +115,7 @@ async function gen(message: string) {
           break
         case 'glm-3':
         case 'glm-4':
+        case 'glm-4-0520':
           json = await generateByZhipuAI(llm, message, {
             width: width.value,
             height: height.value,
@@ -216,6 +245,7 @@ function getStatus() {
               <option value="gpt-4">GPT-4</option>
               <option value="glm-3">GLM-3</option>
               <option value="glm-4">GLM-4</option>
+              <option value="glm-4-0520">GLM-4-0520</option>
               <option value="claude-3">Claude-3</option>
             </select>
           </div>
@@ -235,12 +265,30 @@ function getStatus() {
           </div>
           <div class="py-3 flex flex-col">
             <div class="flex flex-wrap">
-              <div v-for="(mod, index) in modsList" :key="index" class="w-1/2 p-2">
+              <div v-for="(mod, index) in modsList" :key="index" class="w-1/2 p-2" ref="exportButton">
                 <label>
                   <input type="checkbox" :id="mod">
                   {{ mod }}
                 </label>
               </div>
+            </div>
+          </div>
+          <div class="py-3 flex flex-row">
+            <div class="w-1/3 pr-2">
+              <h1 class="font-mono">FPS</h1>
+              <input class="border rounded-lg w-full h-8 bg-white" v-model="fps" value="1600">
+            </div>
+            <div class="w-1/3 pr-2">
+              <h1 class="font-mono">Duration</h1>
+              <input class="border rounded-lg w-full h-8 bg-white" v-model="duration" value="900">
+            </div>
+            <div class="w-1/3 pr-2">
+              <button class="border rounded-lg w-full h-8 bg-white" value="900" :disabled="exports"
+                @click="exportOut(duration, fps)" :class="{
+                  'bg-gary-200': exports
+                }">{{ exports ? 'Exporting...' : 'Export' }}</button>
+              <h1 class="font-mono text-sky-300" v-if="couldDownload"><a type="download" :href="download">Download</a>
+              </h1>
             </div>
           </div>
           <div class="py-3 flex flex-row">
