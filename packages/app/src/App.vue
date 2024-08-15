@@ -179,7 +179,7 @@ function getStatus() {
   <div class="flex flex-col h-screen w-screen overflow-hidden">
     <div class="flex flex-row w-full h-12 border">
       <div class="float-left">
-        <img class="w-10 h-10 pt-1">
+        <img class="w-10 h-10 pt-1" src="/llmvision.svg">
       </div>
       <div class="h-full flex justify-center items-center pl-5 float-left">
         <div class="text-2xl font-mono float-left">LLM Vision</div>
