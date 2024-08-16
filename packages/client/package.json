@@ -1,5 +1,5 @@
 {
-  "name": "@llmvision/client",
+  "name": "@llm-vision/client",
   "version": "1.0.0",
   "description": "The backend code of LLMVision",
   "scripts": {
