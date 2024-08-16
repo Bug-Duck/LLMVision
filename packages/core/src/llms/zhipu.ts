@@ -6,6 +6,7 @@ import { template as core } from '../prompts/core'
 import { template as fm } from '../prompts/frequency-mistake'
 import { template as math } from '../prompts/mod-math'
 import { template as skills } from "../prompts/skills"
+import { template as layout } from '../prompts/mod-layout'
 
 export function createVisionAppBasedOnZhipuAI(options: ChatZhipuAIParams) {
   return new ChatZhipuAI(options)
@@ -17,6 +18,11 @@ export async function generateByZhipuAI(llm: ChatZhipuAI, prompt: string, option
   if (options.mods.math) {
     mods.push(
       new SystemMessage(math)
+    )
+  }
+  if (options.mods.layout) {
+    mods.push(
+      new SystemMessage(layout)
     )
   }
 

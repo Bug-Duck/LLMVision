@@ -3,5 +3,6 @@ export interface ProgramOptions {
   height?: number
   mods?: {
     math?: boolean
+    layout?: boolean
   }
 }

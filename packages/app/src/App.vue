@@ -92,7 +92,7 @@ async function gen(message: string) {
         case 'claude-3':
           llm = createVisionAppBasedOnAnthropic({
             anthropicApiKey: api.value,
-            model: 'claude-3-sonnet-20240229',
+            model: 'claude-3',
           })
           break
       }
@@ -144,7 +144,8 @@ async function gen(message: string) {
             width: width.value,
             height: height.value,
             mods: {
-              math: getStatus().Mathematics
+              math: getStatus().Mathematics,
+              layout: getStatus().Layout,
             }
           },
           key: api.value
@@ -185,7 +186,7 @@ const modsList = ref([
   'Mathematics',
   'Chart (going to be supported soon)',
   'Table (going to be supported soon)',
-  'Layout (going to be supported soon)',
+  'Layout',
   'Geometry (going to be supported soon)',
   'Skottie (going to be supported soon)',
   'SVG (going to be supported soon)',
@@ -247,6 +248,7 @@ function getStatus() {
               <option value="glm-4">GLM-4</option>
               <option value="glm-4-0520">GLM-4-0520</option>
               <option value="claude-3">Claude-3</option>
+              <option value="claude-3.5">Claude-3.5</option>
             </select>
           </div>
           <div class="py-3">

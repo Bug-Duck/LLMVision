@@ -4,6 +4,7 @@ import { template as core } from '../prompts/core'
 import { template as fm } from '../prompts/frequency-mistake'
 import { template as math } from '../prompts/mod-math'
 import { template as skills } from "../prompts/skills"
+import { template as layout } from '../prompts/mod-layout'
 import { ProgramOptions } from './interfaces'
 
 export interface OpenAIOptions {
@@ -28,6 +29,11 @@ export async function generateByOpenAI(llm: ChatOpenAI, prompt: string, options:
   if (options.mods.math) {
     mods.push(
       new SystemMessage(math)
+    )
+  }
+  if (options.mods.layout) {
+    mods.push(
+      new SystemMessage(layout)
     )
   }
 

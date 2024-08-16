@@ -4,6 +4,7 @@ import { HumanMessage } from '@langchain/core/messages'
 import { template as core } from '../prompts/core'
 import { template as fm } from '../prompts/frequency-mistake'
 import { template as math } from '../prompts/mod-math'
+import { template as layout } from '../prompts/mod-layout'
 import { template as skills } from "../prompts/skills"
 
 export function createVisionAppBasedOnBaiduQianfan(options: any) {
@@ -16,6 +17,11 @@ export async function generateByBaiduQianfan(llm: ChatBaiduQianfan, prompt: stri
   if (options.mods.math) {
     mods.push(
       new HumanMessage(math)
+    )
+  }
+  if (options.mods.layout) {
+    mods.push(
+      new HumanMessage(layout)
     )
   }
 

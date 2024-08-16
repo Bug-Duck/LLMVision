@@ -92,7 +92,7 @@ The \`type\` property of actions has two options, they are "change" and "call". 
 
 The followings are the special types of arguments and options.
 
-- \`Color\` this can be two format - a array like [r, g, b, a] or a string which includes a css color name, its format is like "color(name)"
+- \`Color\` this can be two format - a array like [r, g, b, a], its format is like [255, 255, 255, 1], or a string which includes a css color name, its format is like "color(name)"
 
 - \`ArrayBuffer\` this is a array buffer, usually refers to some resources like images or fonts, its format is like "font(url)" or "image(url)"
 
@@ -414,6 +414,10 @@ A circle which is around the widget fade in appears and then destory disappears.
 # \`showPassingFlashAround\`
 
 A rectangle which is around the widget fade in appears and then destory disappears.
+
+# \`discolorate\`
+
+Change the color of some widget from a color to the other color.
 
 ---
 
