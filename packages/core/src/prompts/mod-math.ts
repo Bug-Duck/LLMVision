@@ -56,7 +56,7 @@ NumberPlane has an x axis and a y axis, and the x axis is horizontal, the y axis
 
 arguments: \`lengthX: [number, number], lengthY: [number, number]\`
 
-The lengthX and lengthY are the range of the x axis and y axis, the unit is pixel in common scale.
+The lengthX and lengthY are the range of the x axis and y axis, the unit is pixel in common scale. For example, if you want to draw a number plane with a range of -10 to 10, and the divisionX and divisionY as all 50, you can set lengthX to [-500, 500] and lengthY to [-500, 500].
 
 options:
 
