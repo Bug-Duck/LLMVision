@@ -22,5 +22,6 @@
     "dev": "./src/index.ts",
     "import": "./dist/index.mjs",
     "types": "./dist/index.d.mts"
-  }
+  },
+  "private": false
 }
