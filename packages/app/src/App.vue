@@ -183,13 +183,13 @@ async function gen(message: string) {
 
 const modsList = ref([
   'Mathematics',
-  'Chart',
-  'Table',
-  'Layout',
-  'Geometry',
-  'Skottie',
-  'SVG',
-  'Markdown',
+  'Chart (going to be supported soon)',
+  'Table (going to be supported soon)',
+  'Layout (going to be supported soon)',
+  'Geometry (going to be supported soon)',
+  'Skottie (going to be supported soon)',
+  'SVG (going to be supported soon)',
+  'Markdown (going to be supported soon)',
 ])
 
 function getStatus() {

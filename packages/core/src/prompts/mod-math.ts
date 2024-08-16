@@ -99,4 +99,50 @@ tick: the small line on the axis, it is used to mark the position of the axis.
 grid: the line between the axis, it is used to mark the position of the axis.
 
 If user want to generate a function, in default, we use \`NumberPlane\` as the parent widget.
+
+# \`NumberAxis\`
+
+A number axis is a widget that can be used to display a number line.
+
+arguments: \`length: [number, number]\`
+
+options:
+
+\`\`\`typescript
+export interface NumberAxisOptions extends WidgetOptions {
+  style?: NumberAxisStyle
+
+  /**
+   * The ratio of pixels to 1 tick, i.e. the division value
+   */
+  division?: number
+
+  /**
+   * The trend of the axis, i.e. the function that maps the division to the axis value
+   * For example, if the division is 50, the trend is (x => x / 50), this is default value, too
+   */
+  trend?: Trend
+}
+
+export interface NumberAxisStyle extends WidgetStyle {
+  /**
+   * If display ticks.
+   */
+  ticks?: boolean
+  tickColor?: Color
+
+  /**
+   * if display the number or text under the ticks of the axis
+   */
+  texts?: boolean
+  textColor?: Color
+  textSize?: number
+
+  /**
+   * The color of the axis
+   */
+  color?: Color
+}
+\`\`\`
+
 `
