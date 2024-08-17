@@ -48,7 +48,9 @@ example:
   }
 }
 
-you can use the animation \`create\` or \`stroke\` to have a try.
+you can use the animation \`create\` to have a try.
+
+If the type is MathFunction, please do not use \`stroke\` animation, use \`create\` to instead, because the \`stroke\` animation is not supported on \`MathFunction\`
 
 # \`NumberPlane\`
 
