@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { generateByZhipuAI, createVisionAppBasedOnZhipuAI, createVisionAppBasedOnOpenAI, generateByOpenAI, generateByAnthropic, createVisionAppBasedOnAnthropic } from '@llmvision/core'
+import { generateByZhipuAI, createVisionAppBasedOnZhipuAI, createVisionAppBasedOnOpenAI, generateByOpenAI, generateByAnthropic, createVisionAppBasedOnAnthropic } from '@llm-vision/core'
 import * as nc from 'newcar'
 import * as math from '@newcar/mod-math'
 import { importScene } from '@newcar/json'
