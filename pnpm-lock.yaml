@@ -27,15 +27,15 @@ importers:
       '@langchain/core':
         specifier: ^0.2.22
         version: 0.2.22(langchain@0.2.13(@langchain/anthropic@0.2.15(langchain@0.2.13)(openai@4.55.1(zod@3.23.8)))(@langchain/community@0.2.25(@langchain/anthropic@0.2.15)(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.55.1(zod@3.23.8))(ws@6.2.0))(fast-xml-parser@4.4.1)(ignore@5.3.1)(openai@4.55.1(zod@3.23.8))(ws@6.2.0))(openai@4.55.1(zod@3.23.8))
-      '@llmvision/core':
+      '@llm-vision/core':
         specifier: workspace:*
         version: link:../core
       '@newcar/json':
-        specifier: 2.0.0-beta.11
-        version: 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+        specifier: 2.0.0-beta.14
+        version: 2.0.0-beta.14(canvaskit-wasm@0.39.1)
       '@newcar/mod-math':
-        specifier: 2.0.0-beta.11
-        version: 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+        specifier: 2.0.0-beta.14
+        version: 2.0.0-beta.14(canvaskit-wasm@0.39.1)
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.41)
@@ -79,7 +79,7 @@ importers:
 
   packages/client:
     dependencies:
-      '@llmvision/core':
+      '@llm-vision/core':
         specifier: workspace:*
         version: link:../core
       '@types/cors':
@@ -959,8 +959,18 @@ packages:
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
+  '@newcar/basic@2.0.0-beta.14':
+    resolution: {integrity: sha512-i1BYKfTWU71K8j2d61M7ubNxebKYGIZ6oR9TFSSVkGmczI9xg/hC9HQZ/7NXEAJR27MHE/q6X5cWfYwEZhLQ6Q==}
+    peerDependencies:
+      canvaskit-wasm: '>=0.39.1'
+
   '@newcar/core@2.0.0-beta.11':
     resolution: {integrity: sha512-qC0a6Ln+DDPO/sjVIXtaFPaAg3eRmz4WL98v9QK33wr56Z5BoXaALBVPOPQz1QyV1QBx2aFQl9foE9rkb/dOXQ==}
+    peerDependencies:
+      canvaskit-wasm: '>=0.39.1'
+
+  '@newcar/core@2.0.0-beta.14':
+    resolution: {integrity: sha512-/8lYAHRnxheqBu4SHC9OmHA1uUWpp9MPbL1S+392dnMWbarSJWimVOe7O7ac8a0ZrrkX/4XE1DDBEL9nrcGXbA==}
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
@@ -969,8 +979,13 @@ packages:
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
-  '@newcar/mod-math@2.0.0-beta.11':
-    resolution: {integrity: sha512-9tXKIEWxmgOpkApeiX/GDxmgimRijkyOx62WBZhn+iPhip8yf17HbU6aS+ff5H+xnBpad6YfWJmJ8Avcd1MrBw==}
+  '@newcar/json@2.0.0-beta.14':
+    resolution: {integrity: sha512-QRjegL1LayBfA5HtKJwzoKYZwy9hJ34nCgkKhDsUd4NGcFClY0ZPAaZ+ZOg75dGgHs5dDocpYFD5mjcc6B4pZA==}
+    peerDependencies:
+      canvaskit-wasm: '>=0.39.1'
+
+  '@newcar/mod-math@2.0.0-beta.14':
+    resolution: {integrity: sha512-I5N/OzA21/crFmelCsetzJ0h1nGODlNoRbHtUEmfNs+1p1mf5uJitEKNmJjoZKHvUVzvqQPRlpDs4MPMWKQ8Mg==}
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
@@ -979,6 +994,11 @@ packages:
 
   '@newcar/utils@2.0.0-beta.11':
     resolution: {integrity: sha512-34j6m1EwXUuoLBOiDHvzaqd60IINMKXt1a2gZ9nBeik3Py3n8/iW/r5Oi7tonvv2tLTO0g95akTopo3l1yXSNA==}
+    peerDependencies:
+      canvaskit-wasm: '>=0.39.1'
+
+  '@newcar/utils@2.0.0-beta.14':
+    resolution: {integrity: sha512-MjjiwxZ7v4uffOSydFgpPALaMe7MeJaQaw56vNKnUDHLWDfq4LrlbaZpQWKRNT6MV/0viU8gXpgc4KIfDshyAA==}
     peerDependencies:
       canvaskit-wasm: '>=0.39.1'
 
@@ -4116,9 +4136,21 @@ snapshots:
       '@newcar/utils': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
       canvaskit-wasm: 0.39.1
 
+  '@newcar/basic@2.0.0-beta.14(canvaskit-wasm@0.39.1)':
+    dependencies:
+      '@newcar/core': 2.0.0-beta.14(canvaskit-wasm@0.39.1)
+      '@newcar/utils': 2.0.0-beta.14(canvaskit-wasm@0.39.1)
+      canvaskit-wasm: 0.39.1
+
   '@newcar/core@2.0.0-beta.11(canvaskit-wasm@0.39.1)':
     dependencies:
       '@newcar/utils': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+      canvaskit-wasm: 0.39.1
+      mitt: 3.0.1
+
+  '@newcar/core@2.0.0-beta.14(canvaskit-wasm@0.39.1)':
+    dependencies:
+      '@newcar/utils': 2.0.0-beta.14(canvaskit-wasm@0.39.1)
       canvaskit-wasm: 0.39.1
       mitt: 3.0.1
 
@@ -4130,11 +4162,19 @@ snapshots:
       canvaskit-wasm: 0.39.1
       mitt: 3.0.1
 
-  '@newcar/mod-math@2.0.0-beta.11(canvaskit-wasm@0.39.1)':
+  '@newcar/json@2.0.0-beta.14(canvaskit-wasm@0.39.1)':
     dependencies:
-      '@newcar/basic': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
-      '@newcar/core': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
-      '@newcar/utils': 2.0.0-beta.11(canvaskit-wasm@0.39.1)
+      '@newcar/basic': 2.0.0-beta.14(canvaskit-wasm@0.39.1)
+      '@newcar/core': 2.0.0-beta.14(canvaskit-wasm@0.39.1)
+      '@newcar/utils': 2.0.0-beta.14(canvaskit-wasm@0.39.1)
+      canvaskit-wasm: 0.39.1
+      mitt: 3.0.1
+
+  '@newcar/mod-math@2.0.0-beta.14(canvaskit-wasm@0.39.1)':
+    dependencies:
+      '@newcar/basic': 2.0.0-beta.14(canvaskit-wasm@0.39.1)
+      '@newcar/core': 2.0.0-beta.14(canvaskit-wasm@0.39.1)
+      '@newcar/utils': 2.0.0-beta.14(canvaskit-wasm@0.39.1)
       canvaskit-wasm: 0.39.1
       gl-matrix: 3.4.3
       svg-path: 0.2.1
@@ -4143,6 +4183,11 @@ snapshots:
   '@newcar/recorder@2.0.0-beta.11': {}
 
   '@newcar/utils@2.0.0-beta.11(canvaskit-wasm@0.39.1)':
+    dependencies:
+      canvaskit-wasm: 0.39.1
+      colorparsley: 0.1.8
+
+  '@newcar/utils@2.0.0-beta.14(canvaskit-wasm@0.39.1)':
     dependencies:
       canvaskit-wasm: 0.39.1
       colorparsley: 0.1.8
