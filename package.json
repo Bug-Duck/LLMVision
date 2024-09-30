@@ -1,14 +1,13 @@
 {
-  "name": "llm-vision",
+  "name": "llmvision",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "The LLM Animation Video Maker Based on VueMotion",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["llm", "animation", "math"],
+  "author": "BugDuck Team",
+  "license": "Apache-2.0",
   "devDependencies": {
     "tsup": "^8.2.4",
     "typescript": "^5.5.4"
