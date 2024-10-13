@@ -27,8 +27,9 @@ export class VisionBase {
       }
     })
     this.splitter = new RecursiveCharacterTextSplitter({
-      chunkOverlap: 200,
-      chunkSize: 500,
+      chunkOverlap: 500,
+      chunkSize: 1000,
+      separators: ['@@@@@@', '^^^^^^', '++++++']
     })
     this.splittedDocument = await this.splitter.splitDocuments([this.document!])
   }

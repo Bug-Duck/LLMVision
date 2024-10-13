@@ -3,7 +3,7 @@ import { ChatZhipuAI, ChatZhipuAIParams } from '@langchain/community/chat_models
 import { VisionBase, VisionBaseParams } from "./base"
 import { FaissStore } from "@langchain/community/vectorstores/faiss"
 import { HumanMessage, SystemMessage } from "@langchain/core/messages"
-import { main } from "../prompts"
+import { footer, main } from "../prompts"
 
 export interface VisionZhipuAIParams extends VisionBaseParams {
   model: ChatZhipuAIParams['modelName']
@@ -34,7 +34,8 @@ export class VisionZhipuAI extends VisionBase {
     const context = await retriever?.invoke(userInput)
     const knowledges = context?.map(doc => doc.pageContent).join('\n')!
     const prompts = new SystemMessage(main)
-    const response = await this.model?.invoke([prompts, new SystemMessage(knowledges), new HumanMessage(userInput)])
+    console.log(knowledges)
+    const response = await this.model?.invoke([new SystemMessage(prompts), new SystemMessage(knowledges), new HumanMessage(userInput), new HumanMessage(footer)])
     return response!.content as string
   }
 }

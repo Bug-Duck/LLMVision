@@ -1,8 +1,22 @@
+Widgets are divided into real widgets and abstract widgets. Abstract widgets **cannot** be used directly. In the following sections, abstract widgets will be marked with \`*\`.
+
+Required properties will be marked with \`!\`.
+
+You are supposed to try your best to use the widgets and animations to complete the animation, so please don't use any other properties or methods unless you are sure about what you are doing.
+
+Please choose some widgets and animations (**widgets and animations are both required**) that you may need to use in this animation according to the divide mark:
+
+@@@@@@
+
 ## `@vue-motion/lib`
 
 This packages includes all of the basic graph such as rect, arc, text, and some usual animations.
 
-### Widgets
+^^^^^^
+
+### widgets
+
+++++++
 
 #### *`Widget`
 
@@ -20,11 +34,15 @@ extends from: `none`
 | rotation | `number` | The rotate of the widget.       | `0`         |
 | opacity  | `number` | The opacity of the widget.      | `1`         |
 
+++++++
+
 #### `Group`
 
 `Group` can be used to group some widgets together. It can be used to make some animations. Just include the widgets you want to group in the slots.
 
 extends from: `Widget`
+
+++++++
 
 #### *`Figure`
 
@@ -40,6 +58,8 @@ extends from: `Widget`
 | border-interval | `number` | The stroke dasharray of the figure.  | `[1 ,0]`                  |
 | border-offset   | `number` | The stroke dashoffset of the figure. | `0`                       |
 
+++++++
+
 #### `Arc`
 
 extends from: `Figure`
@@ -50,6 +70,8 @@ extends from: `Figure`
 | end      | `number` | The end angle of the arc.   | `360`   |
 | !radius  | `number` | The radius of the arc.      | -       |
 
+++++++
+
 #### `Rect`
 
 extends from: `Figure`
@@ -58,6 +80,8 @@ extends from: `Figure`
 | -------- | -------- | ---------------------------- | ------- |
 | !width   | `number` | The width of the rectangle.  | -       |
 | !height  | `number` | The height of the rectangle. | -       |
+
+++++++
 
 #### `Line`
 
@@ -68,6 +92,8 @@ extends from: `Figure`
 | !from    | `[number, number]` | The start point of the line. | -       |
 | !to      | `[number, number]` | The end point of the line.   | -       |
 
+++++++
+
 #### `Polygon`
 
 extends from: `Figure`
@@ -76,6 +102,8 @@ extends from: `Figure`
 | -------- | ------------------------- | -------------------------- | ------- |
 | !points  | `Array<[number, number]>` | The points of the polygon. | -       |
 
+++++++
+
 #### `Path`
 
 extends from: `Figure`
@@ -83,6 +111,8 @@ extends from: `Figure`
 | property | type     | description      | default |
 | -------- | -------- | ---------------- | ------- |
 | !points  | `string` | The path string. | -       |
+
+++++++
 
 #### `Text`
 
@@ -100,9 +130,11 @@ extends from: `Figure`
 | word-spacing   | `number`                                                                                                                                           | The spacing between words in the text.   | `undefined` |
 | letter-spacing | `number`                                                                                                                                           | The spacing between letters in the text. | `undefined` |
 
+++++++
+
 #### `TextUnit`
 
-The base unit which can divide contents in `Text` to different styles.
+The base unit which can divide contents in `Text` to different styles. Plesae use it with `<Text>` together.
 
 extends from: `Text`
 
@@ -114,3 +146,53 @@ usage:
   <TextUnit fill-color="yellowgreen">world</TextUnit>
 </Text>
 ```
+
+++++++
+
+^^^^^^
+
+### animations
+
+Please add animations to each widget because you need to make the animation more attractive.
+
+#### `grow`
+
+Let a widget's drawing process grow.
+
+| property | description             | default |
+| -------- | ----------------------- | ------- |
+| duration | `number`                | -       |
+| by       | `(x: number) => number` | x => x  |
+
+#### `move`
+
+Let a widget move by `offsetX` and `offsetY`.
+
+| property | description             | default |
+| -------- | ----------------------- | ------- |
+| duration | `number`                | -       |
+| offsetX  | `number`                | -       |
+| offsetY  | `number`                | -       |
+| by       | `(x: number) => number` | x => x  |
+
+#### `moveTo`
+
+Let a widget move to a specific position.
+
+| property | description             | default |
+| -------- | ----------------------- | ------- |
+| duration | `number`                | -       |
+| x        | `number`                | -       |
+| y        | `number`                | -       |
+| by       | `(x: number) => number` | x => x  |
+
+#### `rotate`
+
+Let a widget rotate by `offset`.
+
+| property | description             | default |
+| -------- | ----------------------- | ------- |
+| duration | `number`                | -       |
+| offset   | `number`                | -       |
+| by       | `(x: number) => number` | x => x  |
+

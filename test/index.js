@@ -8,5 +8,5 @@ await vision.init({
   embeddingsModel: 'embedding-3'
 })
 
-const ans = await vision.generate('在屏幕中央画一个长为100,宽为200的四边形', 1000, 1000)
+const ans = await vision.generate('生成勾股定理演示视频', 1000, 1000)
 console.log(ans)

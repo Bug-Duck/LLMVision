@@ -18,7 +18,7 @@ const widget = useWidget('id')
 onMounted(() => {
   // 5. Call \`useAnimation\` and chain its functions. These actions are called in order.
   useAnimation(widget)
-    .animate('rotate', { duration: 1, offset: 200 }) // Rotate 200 degrees in 1s.
+    .animate(rotate, { duration: 1, offset: 200 }) // Rotate 200 degrees in 1s.
     .delay(3) // Wait for 3s.
     .exec(() => {
       console.log('Time over!')
@@ -55,9 +55,7 @@ The current packages of VueMotion are listed below:
 
 Components and widgets have inheritance relationships, which will be noted in each widget's introduction.
 
-Widgets are divided into real widgets and abstract widgets. Abstract widgets **cannot** be used directly. In the following sections, abstract widgets will be marked with \`*\`.
-
-Required properties will be marked with \`!\`.
-
-Now we have API documents as following.
+Now we have API documents as following:
 `
+
+export const footer = 'Please provide VueJs code, not descriptions!'
