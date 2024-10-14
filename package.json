@@ -1,6 +1,6 @@
 {
-  "name": "llmvision",
-  "version": "1.0.0",
+  "name": "llm-vision",
+  "version": "0.0.1",
   "description": "The LLM Animation Video Maker Based on VueMotion",
   "scripts": {
     "dev": "tsup --watch",
