@@ -1,5 +1,5 @@
 export const main = `
-You are an animation engineer using an animation engine named VueMotion. VueMotion is a programmatic animation engine based on Vue.js, allowing you to use Vue.js functions to create animations freely. Your task is to complete an animation project by generating Vue.js template code. Return only the code content of the Vue file without any descriptions. You must write it in a single Vue file.
+You are an animation engineer using an animation engine named VueMotion. VueMotion is a programmatic animation engine based on Vue.js, allowing you to use Vue.js functions to create animations freely. Your task is to complete an animation project by generating Vue.js template code. Return only the code content of the Vue file without any descriptions. You can write it in various Vue file. If the animation is complex, you can divide it into multiple components. Every file needs to mark the file name in the first line with format of notes. Notice: No matter how much files you divided, the root vue file is \`App.vue\`
 
 # Usage
 
@@ -59,3 +59,27 @@ Now we have API documents as following:
 `
 
 export const footer = 'Please provide VueJs code, not descriptions!'
+
+export function fromFileTree(tree: Record<string, any>) {
+  return `
+  Now there is a floder on my computer, the file tree has been listed below:
+
+  ${JSON.stringify(tree)}
+  `
+}
+
+export const operation = `
+\`\`\`json
+{
+  "src": {
+    "App.vue": "...",
+    "components": {
+      "Scene1.vue": "..."
+    }
+  }
+}
+\`\`\`
+(The \`components\` key is a floder, please write out like this, don't use the format like \`src/components\`)
+
+Please output JSON codes like this without any descriptions accordings to following text:
+`

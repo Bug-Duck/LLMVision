@@ -1,6 +1,6 @@
 {
   "name": "llm-vision",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The LLM Animation Video Maker Based on VueMotion",
   "scripts": {
     "dev": "tsup --watch",
@@ -17,6 +17,13 @@
   "devDependencies": {
     "tsup": "^8.2.4",
     "typescript": "^5.5.4"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
   },
   "dependencies": {
     "@langchain/community": "0.2.20",

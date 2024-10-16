@@ -47,4 +47,9 @@ export class VisionBase {
   ): Promise<string> {
     return new Promise(() => {})
   }
+
+  async operate(
+    AiInput: string,
+    root: string,
+  ): Promise<void> {}
  }

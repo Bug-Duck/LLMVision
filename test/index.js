@@ -8,5 +8,6 @@ await vision.init({
   embeddingsModel: 'embedding-3'
 })
 
-const ans = await vision.generate('生成勾股定理演示视频', 1000, 1000)
-console.log(ans)
+const ans = await vision.generate('生成勾股定理演示视频,记得分多文件', 1000, 1000)
+const op = await vision.operate(ans, './')
+console.log(op)
