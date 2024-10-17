@@ -15,6 +15,7 @@
   "author": "BugDuck Team",
   "license": "Apache-2.0",
   "devDependencies": {
+    "esbuild-plugin-copy": "^2.1.1",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4"
   },
@@ -29,8 +30,12 @@
     "@langchain/community": "0.2.20",
     "@langchain/core": "0.2.20",
     "@types/node": "^22.7.5",
+    "clerc": "^0.44.0",
     "faiss-node": "^0.5.1",
     "jsonwebtoken": "^9.0.2",
     "langchain": "0.2.10"
+  },
+  "bin": {
+    "llmvision": "./dist/client/index.js"
   }
 }

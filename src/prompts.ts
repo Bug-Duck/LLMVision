@@ -69,7 +69,8 @@ export function fromFileTree(tree: Record<string, any>) {
 }
 
 export const operation = `
-\`\`\`json
+I want you to extract any code found in the following text and place it into a JSON structure like this:
+
 {
   "src": {
     "App.vue": "...",
@@ -78,8 +79,8 @@ export const operation = `
     }
   }
 }
-\`\`\`
-(The \`components\` key is a floder, please write out like this, don't use the format like \`src/components\`)
 
-Please output JSON codes like this without any descriptions accordings to following text:
+(The "components" key is a folder, please structure it like this without using paths such as "src/components/".)
+
+Please copy the extracted code exactly as is, without making any changes to it. No explanations are needed, just output the JSON format.
 `
