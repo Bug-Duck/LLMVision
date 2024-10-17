@@ -47,9 +47,7 @@ export class VisionZhipuAI extends VisionBase {
       ) + operation),
       new HumanMessage(AiInput)
     ])
-    console.log(AiInput)
     const { content } = response!
-    console.log(content)
     const data = JSON.parse((content as string).replace(/^```json/, '').replace(/```$/, ''))
     writeFilesFromObject(resolve(root), data)
   }

@@ -63,7 +63,7 @@ clerc
         documentPath: path.resolve(__dirname + '/main.md')
       })
       const res = await vision.generate(context.parameters.desc, 1600, 900)
-      await vision.operate(res, path.resolve(process.cwd() + '/src'))
+      await vision.operate(res, path.resolve(process.cwd()))
     }
   })
 
