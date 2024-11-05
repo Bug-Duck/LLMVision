@@ -13,10 +13,10 @@ export function readDirToObject(dirPath: string): FileTree {
     const itemPath = path.join(dirPath, item);
     const stats = fs.statSync(itemPath);
     
-    if (stats.isDirectory()) {
+    if (stats.isDirectory() && !itemPath.match(/.+node_modules.+/)) {
       result[item] = readDirToObject(itemPath);
     } else if (stats.isFile()) {
-      result[item] = fs.readFileSync(itemPath, 'utf-8');
+      result[item] = 'xxx'
     }
   }
   

@@ -1,10 +1,74 @@
-Widgets are divided into real widgets and abstract widgets. Abstract widgets **cannot** be used directly. In the following sections, abstract widgets will be marked with \`*\`.
-
-Required properties will be marked with \`!\`.
-
-You are supposed to try your best to use the widgets and animations to complete the animation, so please don't use any other properties or methods unless you are sure about what you are doing.
-
 Please choose some widgets and animations (**widgets and animations are both required**) that you may need to use in this animation according to the divide mark:
+
+@@@@@@
+
+## `@vue-motion/core`
+
+This packages includes some hooks that requrired, plesae **choose the entire of the part!**
+
+^^^^^^
+
+### hooks
+
+++++++
+
+#### `useMotion`
+
+This is a hooks which could get the info of `<Motion>`. You can change them after require:
+
+```vue
+<script setup>
+import { useMotion } from '@vue-motion/core'
+
+const { width, height } = useMotion()
+
+// Set the width of the video to 1600
+width.value = 1600
+// Set the height of the video to 900
+height.value = 900
+</script>
+```
+
+++++++
+
+#### `useWidget`
+
+You can call this function to get a widget, the widget is `Reactive` type, which includes the properties of the widget so that you can change them. You can set the `wid` (Widget ID) property of a component
+
+```vue
+<script setup>
+import { useWidget } from '@vue-motion/core'
+import { Rect } from '@vue-motion/lib'
+
+const widget = useWidget('widget1')
+
+onMounted(() => {
+  widget.width = 300
+  widget.height = 300
+})
+</script>
+
+<template>
+  <Rect :width="100" :height="150" wid="widget1" />
+</template>
+```
+
+++++++
+
+#### `usePlayer`
+
+This is a hook which could get the player instance, you can use it to control the player, meanwhile, it returns a `play` function which could play the video and a `useAnimation` hook which could control the animation.
+
+```vue
+<script setup>
+import { usePlayer } from '@vue-motion/core'
+
+const { play, useAnimation } = usePlayer()
+
+// Play the video
+player.play()
+</script>
+```
 
 @@@@@@
 
@@ -155,6 +219,8 @@ usage:
 
 Please add animations to each widget because you need to make the animation more attractive.
 
+++++++
+
 #### `grow`
 
 Let a widget's drawing process grow.
@@ -163,6 +229,8 @@ Let a widget's drawing process grow.
 | -------- | ----------------------- | ------- |
 | duration | `number`                | -       |
 | by       | `(x: number) => number` | x => x  |
+
+++++++
 
 #### `move`
 
@@ -175,6 +243,8 @@ Let a widget move by `offsetX` and `offsetY`.
 | offsetY  | `number`                | -       |
 | by       | `(x: number) => number` | x => x  |
 
+++++++
+
 #### `moveTo`
 
 Let a widget move to a specific position.
@@ -185,6 +255,8 @@ Let a widget move to a specific position.
 | x        | `number`                | -       |
 | y        | `number`                | -       |
 | by       | `(x: number) => number` | x => x  |
+
+++++++
 
 #### `rotate`
 

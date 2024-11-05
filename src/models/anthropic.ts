@@ -1,33 +1,34 @@
-import { ZhipuAIEmbeddings, ZhipuAIEmbeddingsParams } from "@langchain/community/embeddings/zhipuai"
-import { ChatZhipuAI, ChatZhipuAIParams } from '@langchain/community/chat_models/zhipuai'
+import { ChatAnthropic, AnthropicInput } from "@langchain/anthropic"
 import { VisionBase, VisionBaseParams } from "./base"
 import { FaissStore } from "@langchain/community/vectorstores/faiss"
 import { AIMessage, HumanMessage, SystemMessage } from "@langchain/core/messages"
 import { documentDesc, footer, fromFileTree, main, operation } from "../prompts"
 import { readDirToObject, writeFilesFromObject } from '../utils/list-file-tree'
 import { resolve } from "path"
+import { ZhipuAIEmbeddings, ZhipuAIEmbeddingsParams } from "@langchain/community/embeddings/zhipuai"
 
-export interface VisionZhipuAIParams extends VisionBaseParams {
-  model: ChatZhipuAIParams['modelName']
+export interface VisionAnthropicParams extends VisionBaseParams {
+  model: AnthropicInput['model']
   embeddingsModel: ZhipuAIEmbeddingsParams['modelName']
   key: string
+  embeddingKey: string
 }
 
-export class VisionZhipuAI extends VisionBase {
+export class VisionAnthropicAI extends VisionBase {
   embeddings: ZhipuAIEmbeddings | undefined
   store: FaissStore | undefined
-  model: ChatZhipuAI | undefined
+  model: ChatAnthropic | undefined
 
-  async init(params: VisionZhipuAIParams): Promise<void> {
+  async init(params: VisionAnthropicParams): Promise<void> {
     await super.init(params)
     this.embeddings = new ZhipuAIEmbeddings({
-      apiKey: params.key,
+      apiKey: params.embeddingKey,
       modelName: params.embeddingsModel,
     })
     this.store = await FaissStore.fromDocuments(this.splittedDocument!, this.embeddings)
-    this.model = new ChatZhipuAI({
+    this.model = new ChatAnthropic({
       apiKey: params.key,
-      modelName: params.model,
+      modelName: params.model
     })
   }
 
@@ -37,9 +38,7 @@ export class VisionZhipuAI extends VisionBase {
     const knowledges = context?.map(doc => doc.pageContent).join('\n')!
     const prompts = new SystemMessage(main)
     const response = await this.model?.invoke([
-      new SystemMessage(prompts),
-      new SystemMessage(knowledges),
-      new SystemMessage(documentDesc),
+      new SystemMessage(prompts + '\n' + knowledges + '\n' + documentDesc),
       new HumanMessage(userInput),
       new HumanMessage(footer)
     ])
@@ -47,13 +46,14 @@ export class VisionZhipuAI extends VisionBase {
   }
 
   override async operate(AiInput: string, root: string): Promise<void> {
-    console.log(readDirToObject(root))
-    const response = await this.model?.invoke([
+    const input = [
       new SystemMessage(fromFileTree(
         readDirToObject(root)
       ) + operation),
       new HumanMessage(AiInput)
-    ])
+    ]
+    console.log(input)
+    const response = await this.model?.invoke(input)
     const { content } = response!
     const data = JSON.parse((content as string).replace(/^```json/, '').replace(/```$/, ''))
     writeFilesFromObject(resolve(root), data)

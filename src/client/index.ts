@@ -3,12 +3,13 @@
 import { Clerc } from "clerc"
 import path from "node:path"
 import os from 'node:os'
-import fs, { read } from 'node:fs'
+import fs from 'node:fs'
 import process from "node:process"
 import { CacheSet } from "./types"
 import { VisionZhipuAI } from "../models"
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { VisionAnthropicAI } from "../models/anthropic"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -53,7 +54,7 @@ clerc
       return console.error('Please set the embedding of LLM! Command: `llmvision set --embedding=xxx`')
     if (typeof cache.key === typeof void 0)
       return console.error('Please set the key of LLM! Command: `llmvision set --key=xxx`')
-    
+
     if (cache.base === 'zhipu_ai') {
       const vision = new VisionZhipuAI()
       await vision.init({
@@ -61,6 +62,19 @@ clerc
         model: cache.model,
         embeddingsModel: cache.embedding,
         documentPath: path.resolve(__dirname + '/main.md')
+      })
+      const res = await vision.generate(context.parameters.desc, 1600, 900)
+      await vision.operate(res, path.resolve(process.cwd()))
+    } else if (cache.base === 'anthropic') {
+      if (typeof cache.embeddingKey === typeof void 0)
+        return console.error('Please set the embedding base of LLM! Command: `llmvision set --embedding-key=xxx`')
+      const vision = new VisionAnthropicAI()
+      await vision.init({
+        key: cache.key,
+        model: cache.model,
+        embeddingsModel: cache.embedding,
+        documentPath: path.resolve(__dirname + '/main.md'),
+        embeddingKey: cache.embeddingKey
       })
       const res = await vision.generate(context.parameters.desc, 1600, 900)
       await vision.operate(res, path.resolve(process.cwd()))
@@ -76,6 +90,10 @@ clerc
       'model': {
         type: String,
         description: 'The model of LLM for example: `chatglm3-130b`'
+      },
+      'embeddingKey': {
+        type: String,
+        description: 'The embedding base of LLM for example: `1234567890`'
       },
       'embedding': {
         type: String,
@@ -97,6 +115,8 @@ clerc
       cache.embedding = context.flags.embedding as any
     if (typeof context.flags.key !== typeof void 0)
       cache.key = context.flags.key as any
+    if (typeof context.flags.embeddingKey !== typeof void 0)
+      cache.embeddingKey = context.flags.embeddingKey as any
     setCache(JSON.stringify(cache))
   })
   .parse()
