@@ -1,7 +1,7 @@
 import json
 from zhipuai import ZhipuAI
 from prompts.apis import generate_document
-from prompts.main import get_main_prompts, necessary
+from prompts.main import get_main_prompts
 from prompts.choice import get_choice_prompts
 
 def generate(
@@ -39,11 +39,10 @@ def generate(
       },
       {
         "role": "user",
-        "content": requirement + "\n" + necessary
+        "content": requirement + "\n" + "Now please generate VueJS Codes without any other text: "
       }
     ]
   )
-  print(final_asnwer.choices[0].message.content.replace('```json', '').replace('```', ''))
-  processed = json.loads(final_asnwer.choices[0].message.content.replace('```json', '').replace('```', ''))
+  processed = final_asnwer.choices[0].message.content
   print(processed)
   return processed
