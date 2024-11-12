@@ -11,6 +11,7 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/vue-fontawesome": "^3.0.8",
+    "@fortawesome/fontawesome-svg-core": "6.6.0",
     "@vue-motion/core": "^0.6.0",
     "@vue-motion/lib": "^0.6.0",
     "js-cookie": "^3.0.5",
