@@ -15,7 +15,6 @@ import { hexToRgb } from './utils/color';
 
 library.add(faCog);
 
-const componentHtml = ref('<div></div>');
 const apiKey = ref(Cookies.get('apiKey') || '');
 const description = ref('');
 const showModal = ref(false);
@@ -60,27 +59,21 @@ onMounted(() => {
 // 添加按钮处理方法
 const isRotating = ref(false);
 
-const handleSubmit = () => {
+// Add ref for DynamicComponent
+const dynamicComponentRef = ref()
+
+const handleSubmit = async () => {
   isRotating.value = true;
+  // Pass the description as prompt
+  await dynamicComponentRef.value?.requestNewAnimation(description.value);
   setTimeout(() => {
     isRotating.value = false;
-  }, 2000); // 2秒后停止动画
-  console.log('提交描述:', description.value);
+  }, 2000);
 };
 
 const handleDownload = () => {
   // 处理下载逻辑
   console.log('下载组件');
-};
-
-const handleTest = async () => {
-  try {
-    const response = await fetch('/src/test.txt');
-    const text = await response.text();
-    componentHtml.value = text;
-  } catch (error) {
-    console.error('读取测试文件失败:', error);
-  }
 };
 </script>
 
@@ -103,18 +96,15 @@ const handleTest = async () => {
         @download="handleDownload"
       />
 
-      <DynamicComponent 
-        :componentHtml="componentHtml" 
+      <DynamicComponent
+        ref="dynamicComponentRef"
+        :prompt="description"
         class="dynamic-component"
         :class="{ 'rotating': isRotating }"
       />
       
       <font-awesome-icon :icon="['fas', 'cog']" class="settings-icon" @click="showModal = true" />
     </div>
-    
-    <button class="test-action-button" @click="handleTest">
-      <span class="button-text">测试组件</span>
-    </button>
     
     <div v-if="showModal" class="modal-overlay"></div>
     <SettingsModal v-if="showModal" @close="showModal = false" @save="setSettings" />

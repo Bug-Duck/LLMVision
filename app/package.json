@@ -9,15 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/vue-fontawesome": "^3.0.8",
-    "@fortawesome/fontawesome-svg-core": "6.6.0",
     "@vue-motion/core": "^0.6.0",
     "@vue-motion/lib": "^0.6.0",
     "js-cookie": "^3.0.5",
+    "llamotion-sdk": "^0.0.4",
     "vue": "^3.5.12"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@vitejs/plugin-vue": "^5.1.4",
     "typescript": "~5.6.2",
     "vite": "^5.4.10",
