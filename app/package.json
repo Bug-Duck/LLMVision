@@ -10,19 +10,19 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "6.6.0",
-    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@vue-motion/core": "^0.6.0",
     "@vue-motion/lib": "^0.6.0",
     "js-cookie": "^3.0.5",
-    "llamotion-sdk": "^0.0.4",
-    "vue": "^3.5.12"
+    "llamotion-sdk": "latest",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
-    "@vitejs/plugin-vue": "^5.1.4",
-    "typescript": "~5.6.2",
-    "vite": "^5.4.10",
-    "vue-tsc": "^2.1.8"
+    "@vitejs/plugin-vue": "^5.2.1",
+    "typescript": "~5.6.3",
+    "vite": "^5.4.11",
+    "vue-tsc": "^2.1.10"
   }
 }

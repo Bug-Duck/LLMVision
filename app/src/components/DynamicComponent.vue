@@ -5,13 +5,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 import { createLLAMotionClient } from 'llamotion-sdk'
 import Cookies from 'js-cookie'
 
 const client = createLLAMotionClient({
   apiKey: Cookies.get('apiKey')!,
-  model: 'ft:gpt-4o-mini-2024-07-18:personal::AT9I9SDW',
+  model: 'ft:gpt-4o-mini-2024-07-18:personal::AaPkVTc6',
 })
 
 const props = defineProps<{

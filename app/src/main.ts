@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 import { llamotion } from 'llamotion-sdk';
+import * as Vue from 'vue'
+(window as any).Vue = Vue
 
 library.add(faCog);
 
